@@ -3,29 +3,29 @@
   "author": "Ryan Dawes",
   "private": true,
   "dependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "tailwindcss": "^3.1.4",
+    "typescript": "latest",
+    "sass": "latest"
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0",
+    "npm": "^8.13.2",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.6.2",
+    "@parcel/transformer-sass": "^2.6.2",
+    "process": "^0.11.10",
+    "@types/react-dom": "18.0.6",    
+    "react-scripts": "latest",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
-    "@tailwindcss/aspect-ratio": "^0.4.0",
-    "@tailwindcss/forms": "^0.5.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sass": "latest",
-    "tailwindcss": "^3.1.4",
-    "typescript": "latest"
-  },
-  "devDependencies": {
-    "@parcel/transformer-sass": "^2.6.2",
-    "@types/react-dom": "18.0.6",
-    "gh-pages": "^4.0.0",
-    "npm": "^8.13.2",
-    "npm-run-all": "^4.1.5",
-    "parcel": "^2.6.2",
-    "process": "^0.11.10",
-    "react-scripts": "latest"
+    "react-dom": "^18.2.0"
   },
   "scripts": {
     "dev": "parcel src/pages/*.html",
