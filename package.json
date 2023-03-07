@@ -15,8 +15,8 @@
     "process": "^0.11.10"
   },
   "scripts": {
-    "dev": "parcel src/*.html src/about/*.html src/contact/*.html",
-    "build": "parcel build src/*.html src/about/*.html src/contact/*.html",
+    "dev": "parcel src/*.html",
+    "build": "parcel build src/*.html",
     "clean": "rm -rf dist/",
     "copy": "cp CNAME dist/",
     "pages": "gh-pages -d dist/",
