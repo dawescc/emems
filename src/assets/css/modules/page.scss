@@ -43,7 +43,7 @@
       margin: 0 0 1em;
       width: 10.625em;
       filter: grayscale(80%);
-      transform: translateX(-60px) translateY(5px) translateZ(-10px);
+      transform: translateX(-1vh) translateY(1vh);
       transition: all .35s cubic-bezier(0.445, 0.05, 0.55, 0.95);
       opacity: 100%;
     }
@@ -137,8 +137,8 @@
 
 .stats {
   position: absolute;
-  right: -60px;
-  top: 40px;
+  right: -70px;
+  top: 15px;
   transition: opacity .2s ease, transform .1s linear;
   transition-delay: 0s;
 }
