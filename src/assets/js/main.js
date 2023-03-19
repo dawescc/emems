@@ -29,6 +29,9 @@ function sendMemo() {
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.send(JSON.stringify(memoData));
       document.getElementById("memo-input").value = ""; // clear the text box
+      const targetElement = document.querySelector(".input-container"); // remove green bolt
+      targetElement.classList.remove("active");
+      alert('Posted!');
   }
 }
 
@@ -76,6 +79,7 @@ fetch('https://memos.dawes.casa/explore/rss.xml')
 
 
 // When text is present, allow resizing up to 50% height
+// change color of bolt to green
 const memoInput = document.querySelector("#memo-input");
 const targetElement = document.querySelector(".input-container");
 
