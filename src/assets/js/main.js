@@ -88,3 +88,23 @@ memoInput.addEventListener("input", function() {
     memoInput.classList.remove("sizeable");
   }
 });
+
+// Version Meta Tag
+function addMetaTagWithUniqueId() {
+  // generate a random ID string
+  var id = 'meta-' + Math.random().toString(36).substr(2, 9);
+
+  // create the meta tag with the unique ID and formatted last modified date
+  var meta = document.createElement('meta');
+  meta.setAttribute('name', 'version');
+  var lastModifiedDate = new Date(document.lastModified);
+  meta.setAttribute('content', lastModifiedDate.toISOString().substr(0, 10));
+
+  // append the meta tag to the head of the document
+  var head = document.getElementsByTagName('head')[0];
+  head.appendChild(meta);
+}
+
+addMetaTagWithUniqueId()
+
+//
