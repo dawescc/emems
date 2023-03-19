@@ -1,14 +1,18 @@
-// get the modal element
-var modal = document.getElementById("myModal");
+// Focus on Text bar on load
+window.addEventListener("load", function() {
+  const memoInput = document.querySelector("#memo-input");
+  memoInput.focus();
+});
 
-// get the close button for the modal
+// Close the modal
+var modal = document.getElementById("modal");
 var closeBtn = document.getElementsByClassName("close")[0];
 
-// when the user clicks on the close button, close the modal
 closeBtn.onclick = function() {
   modal.style.display = "none";
 };
 
+// Send Memo function
 function sendMemo() {
   var memoContent = document.getElementById("memo-input").value;
   if (memoContent === "") {
@@ -25,18 +29,21 @@ function sendMemo() {
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.send(JSON.stringify(memoData));
       document.getElementById("memo-input").value = ""; // clear the text box
-  }}
+  }
+}
 
+// Enter = sendMemo()
+// Shift + Enter = New Line
 const input = document.getElementById('memo-input');
 const button = document.getElementById('submit');
-
+  // When button is pressed down
 input.addEventListener('keydown', event => {
   if (event.key === 'Enter' && !event.shiftKey) {
     event.preventDefault();
     button.style.setProperty("background-color", "rgba(0,0,0, .25)", "important");
   }
 });
-
+  // When button is released
 input.addEventListener('keyup', event => {
   if (event.key === 'Enter' && !event.shiftKey) {
     event.preventDefault();
@@ -45,6 +52,7 @@ input.addEventListener('keyup', event => {
   }
 });
 
+// RSS Feed for Recent Posts
 fetch('https://memos.dawes.casa/explore/rss.xml')
 .then(response => response.text())
 .then(xmlString => {
@@ -67,6 +75,7 @@ fetch('https://memos.dawes.casa/explore/rss.xml')
 });
 
 
+// When text is present, allow resizing up to 50% height
 const memoInput = document.querySelector("#memo-input");
 const targetElement = document.querySelector(".input-container");
 
@@ -79,9 +88,3 @@ memoInput.addEventListener("input", function() {
     memoInput.classList.remove("sizeable");
   }
 });
-
-window.addEventListener("load", function() {
-  const memoInput = document.querySelector("#memo-input");
-  memoInput.focus();
-});
-
