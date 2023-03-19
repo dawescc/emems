@@ -6,11 +6,32 @@ window.addEventListener("load", function() {
 
 // Close the modal
 var modal = document.getElementById("modal");
+var good_modal = document.getElementById("success");
 var closeBtn = document.getElementsByClassName("close")[0];
 
 closeBtn.onclick = function() {
   modal.style.display = "none";
+  good_modal.style.display = "none";
 };
+
+// Fade Success Modal
+
+function fadeOut(element, duration) {
+  var interval = 10; // interval between opacity changes in milliseconds
+  var steps = duration / interval; // number of opacity changes over the duration
+  var opacity = 1; // initial opacity value
+  var delta = opacity / steps; // amount to decrease opacity on each step
+
+  var fadeEffect = setInterval(function() {
+    opacity -= delta;
+    element.style.opacity = opacity;
+    if (opacity <= 0) {
+      clearInterval(fadeEffect);
+      element.style.display = 'none'; // hide the element when the animation is complete
+    }
+  }, interval);
+}
+
 
 // Send Memo function
 function sendMemo() {
@@ -31,7 +52,9 @@ function sendMemo() {
       document.getElementById("memo-input").value = ""; // clear the text box
       const targetElement = document.querySelector(".input-container"); // remove green bolt
       targetElement.classList.remove("active");
-      alert('Posted!');
+      good_modal.style.display = "block";
+      fadeOut(good_modal, 4000); // fade out myElement over 1 second (1000 milliseconds)
+      
   }
 }
 
