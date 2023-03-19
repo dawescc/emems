@@ -3,7 +3,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css');
 
 :root,
-:root * {
+textarea {
     font-family: 'Lato', sans-serif;
     font-size: 16px;
 }
@@ -36,7 +36,11 @@ html {
     align-items: center;
     border: 1.5px solid var(--border);
     border-radius: 15px;
-    background-color: #262626;
+    background-color: transparent;
+
+    &:focus-within {
+        background-color: #262626;  
+    }
 
     .memo-input {
         background-color: transparent;
@@ -54,14 +58,15 @@ html {
         padding: 10px;
         padding-inline-end: 15px;
         background-color: transparent;
+        border-bottom-right-radius: 15px;
+        border-top-right-radius: 15px;
         border: none;
         cursor: pointer;
         color: var(--text);
 
-        &:hover {
+        &:hover,
+        &:active {
             background-color: rgba($color: #000000, $alpha: .25);
-            border-bottom-right-radius: 15px;
-            border-top-right-radius: 15px;
         }
     }
 }

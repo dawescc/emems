@@ -9,13 +9,6 @@
         modal.style.display = "none";
       };
 
-      // when the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      };
-
       function sendMemo() {
         var memoContent = document.getElementById("memo-input").value;
         if (memoContent === "") {
@@ -23,6 +16,7 @@
           modal.style.display = "block";
         } else {
           // otherwise, send the memo data via HTTP POST request
+          modal.style.display = "none";
           var memoData = {
             "content": memoContent
           };
@@ -39,7 +33,15 @@ const button = document.getElementById('submit');
 input.addEventListener('keydown', event => {
   if (event.key === 'Enter' && !event.shiftKey) {
     event.preventDefault();
+    button.style.setProperty("background-color", "rgba(0,0,0, .25)", "important");
+  }
+});
+
+input.addEventListener('keyup', event => {
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault();
     button.click();
+    button.style.setProperty("background-color", "rgba(0,0,0, .00)", "important");
   }
 });
 
@@ -56,7 +58,7 @@ fetch('https://memos.dawes.casa/explore/rss.xml')
         const description = item.querySelector('description').textContent;
         const post = document.createElement('div');
         post.className = 'post';
-        post.innerHTML = `<a href="${link}"><p>${description}</p></a>`;
+        post.innerHTML = `<a target="_blank" href="${link}"><p>${description}</p></a>`;
         postsContainer.appendChild(post);
     });
 })
