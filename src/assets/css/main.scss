@@ -1,5 +1,5 @@
-@import url('./modules/colors.css');
-@import url('./modules/fonts.css');
+@import './modules/colors.scss';
+@import './modules/fonts.scss';
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css');
 
 :root,
@@ -9,8 +9,8 @@ textarea {
 }
 
 html {
-    background-color: var(--background);
-    color: var(--text);
+    background-color: $background;
+    color: $text;
     font-size: 16px;
 }
 
@@ -34,7 +34,7 @@ html {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 1.5px solid var(--border);
+    border: 1.5px solid $border;
     border-radius: 15px;
     background-color: transparent;
 
@@ -44,7 +44,7 @@ html {
 
     .memo-input {
         background-color: transparent;
-        color: var(--text);
+        color: $text;
         padding: 5px 10px;
         flex-grow: 2;
         border: none;
@@ -62,7 +62,7 @@ html {
         border-top-right-radius: 15px;
         border: none;
         cursor: pointer;
-        color: var(--text);
+        color: $text;
 
         &:hover,
         &:active {
@@ -110,7 +110,7 @@ h3#recents {
     margin-top: 7vh;
     font-size: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid $border;
 
 }
 
@@ -125,7 +125,7 @@ div#posts {
         border: 1px solid #262626;
         &:hover {
             background-color: #252525;
-            border: 1px solid var(--border);
+            border: 1px solid $border;
         }
         margin-top: 10px;
 
