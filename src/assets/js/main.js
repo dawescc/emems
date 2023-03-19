@@ -65,3 +65,23 @@ fetch('https://memos.dawes.casa/explore/rss.xml')
 .catch(error => {
     console.log(error);
 });
+
+
+const memoInput = document.querySelector("#memo-input");
+const targetElement = document.querySelector(".input-container");
+
+memoInput.addEventListener("input", function() {
+  if (memoInput.value.trim() !== "") {
+    targetElement.classList.add("active");
+    memoInput.classList.add("sizeable");
+  } else {
+    targetElement.classList.remove("active");
+    memoInput.classList.remove("sizeable");
+  }
+});
+
+window.addEventListener("load", function() {
+  const memoInput = document.querySelector("#memo-input");
+  memoInput.focus();
+});
+
