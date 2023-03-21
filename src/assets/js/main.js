@@ -14,24 +14,28 @@ closeBtn.onclick = function() {
   good_modal.style.display = "none";
 };
 
-// Fade Success Modal
-
-function fadeOut(element, duration) {
-  var interval = 10; // interval between opacity changes in milliseconds
-  var steps = duration / interval; // number of opacity changes over the duration
-  var opacity = 1; // initial opacity value
-  var delta = opacity / steps; // amount to decrease opacity on each step
-
-  var fadeEffect = setInterval(function() {
-    opacity -= delta;
-    element.style.opacity = opacity;
-    if (opacity <= 0) {
-      clearInterval(fadeEffect);
-      element.style.display = 'none'; // hide the element when the animation is complete
+// Confetti function
+function runConfetti() {
+  var duration = 1.75 * 1000;
+  var animationEnd = Date.now() + duration;
+  var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+  
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+  var interval = setInterval(function() {
+    var timeLeft = animationEnd - Date.now();
+  
+    if (timeLeft <= 0) {
+      return clearInterval(interval);
     }
-  }, interval);
-}
-
+  
+    var particleCount = 50 * (timeLeft / duration);
+    // since particles fall down, start a bit higher than random
+    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+  }, 250);
+};
 
 // Send Memo function
 function sendMemo() {
@@ -52,9 +56,7 @@ function sendMemo() {
       document.getElementById("memo-input").value = ""; // clear the text box
       const targetElement = document.querySelector(".input-container"); // remove green bolt
       targetElement.classList.remove("active");
-      good_modal.style.display = "block";
-      fadeOut(good_modal, 4000); // fade out myElement over 1 second (1000 milliseconds)
-      
+      runConfetti();
   }
 }
 
@@ -117,7 +119,7 @@ memoInput.addEventListener("input", function() {
 });
 
 // Version Meta Tag
-function addMetaTagWithUniqueId() {
+function addVersion() {
   // create the meta tag with the unique ID and formatted last modified date
   var meta = document.createElement('meta');
   meta.setAttribute('name', 'version');
@@ -128,7 +130,4 @@ function addMetaTagWithUniqueId() {
   var head = document.getElementsByTagName('head')[0];
   head.appendChild(meta);
 }
-
-addMetaTagWithUniqueId()
-
-//
+addVersion()

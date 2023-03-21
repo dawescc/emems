@@ -110,15 +110,6 @@ html {
     border-radius: 10px;
     padding-inline: 10px;
     padding-block: 10px;
-
-    &#success {
-        background-color: rgba($color: mediumseagreen, $alpha: .5);
-
-        &:hover {
-            transition: all .3s ease;
-            background-color: rgba($color: mediumseagreen, $alpha: .95);
-        }
-    }
     
     .modal-content {
         padding-block: 5px;
@@ -149,7 +140,7 @@ div#posts {
     display: flex;
     flex-direction: column;
     max-height: 75vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     .post {
         border-radius: 12px;
