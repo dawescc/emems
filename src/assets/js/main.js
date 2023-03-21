@@ -107,7 +107,7 @@ fetch('https://memos.dawes.casa/explore/rss.xml')
       `<p style="text-align:center;">
       <i style="font-size:2.5rem;" class="fa-regular fa-thumbs-down"></i>
       <br /><br />
-      No Posts
+      Ain't shit here, Chief
       <br /><br />
       Last Checked: ${pubbydate}</p>`;
 
