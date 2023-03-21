@@ -53,10 +53,10 @@ function sendMemo() {
       xhr.open("POST", "https://memos.dawes.casa/api/memo?openId=05d3578b-8672-447c-8fff-dec4db3df6dc");
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.send(JSON.stringify(memoData));
+      runConfetti();
       document.getElementById("memo-input").value = ""; // clear the text box
       const targetElement = document.querySelector(".input-container"); // remove green bolt
       targetElement.classList.remove("active");
-      runConfetti();
   }
 }
 
@@ -97,6 +97,15 @@ fetch('https://memos.dawes.casa/explore/rss.xml')
         post.innerHTML = `<a target="_blank" href="${link}"><p>${description}</p></a>`;
         postsContainer.appendChild(post);
     });
+    if (!postsContainer.hasChildNodes()) {
+      const pubby = xml.querySelectorAll('pubDate');
+      const pubbydate = pubby[0].innerHTML
+      const nopost = document.createElement('div');
+      nopost.className = 'nopost';
+      nopost.innerHTML = `<p>No Posts &nbsp; <i class="fa-regular fa-thumbs-down"></i>
+      <br /><br />Last Checked: ${pubbydate}</p>`;
+      postsContainer.appendChild(nopost);
+    }
 })
 .catch(error => {
     console.log(error);
@@ -119,15 +128,14 @@ memoInput.addEventListener("input", function() {
 });
 
 // Version Meta Tag
-function addVersion() {
-  // create the meta tag with the unique ID and formatted last modified date
-  var meta = document.createElement('meta');
-  meta.setAttribute('name', 'version');
-  var lastModifiedDate = new Date(document.lastModified);
-  meta.setAttribute('content', lastModifiedDate.toISOString());
 
-  // append the meta tag to the head of the document
-  var head = document.getElementsByTagName('head')[0];
-  head.appendChild(meta);
-}
-addVersion()
+// create the meta tag with the unique ID and formatted last modified date
+var meta = document.createElement('meta');
+meta.setAttribute('name', 'version');
+var lastModifiedDate = new Date(document.lastModified);
+meta.setAttribute('content', lastModifiedDate.toISOString());
+
+// append the meta tag to the head of the document
+var head = document.getElementsByTagName('head')[0];
+head.appendChild(meta);
+

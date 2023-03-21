@@ -23,7 +23,7 @@ html {
     overflow: hidden;
 
     .content-wrapper {
-        max-width: 750px;
+        max-width: 725px;
         width: 100%;
         margin-inline: auto;
         overflow: hidden;
@@ -166,6 +166,15 @@ div#posts {
         }
     }
 
+    .nopost {
+        p {
+            text-decoration: none;
+            font-style: italic;
+            color: gray;
+            margin: 0;
+            padding: 0;
+        }
+    }
 }
   
 
