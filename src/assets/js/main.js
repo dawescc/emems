@@ -102,8 +102,15 @@ fetch('https://memos.dawes.casa/explore/rss.xml')
       const pubbydate = pubby[0].innerHTML
       const nopost = document.createElement('div');
       nopost.className = 'nopost';
-      nopost.innerHTML = `<p>No Posts &nbsp; <i class="fa-regular fa-thumbs-down"></i>
-      <br /><br />Last Checked: ${pubbydate}</p>`;
+      nopost.innerHTML =
+      
+      `<p style="text-align:center;">
+      <i class="fa-regular fa-thumbs-down"></i>
+      <br /><br />
+      No Posts
+      <br /><br />
+      Last Checked: ${pubbydate}</p>`;
+
       postsContainer.appendChild(nopost);
     }
 })
