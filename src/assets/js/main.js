@@ -105,7 +105,7 @@ fetch('https://memos.dawes.casa/explore/rss.xml')
       nopost.innerHTML =
       
       `<p style="text-align:center;">
-      <i style="font-size:2.5;" class="fa-regular fa-thumbs-down"></i>
+      <i style="font-size:2.5rem;" class="fa-regular fa-thumbs-down"></i>
       <br /><br />
       No Posts
       <br /><br />
