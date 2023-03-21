@@ -8,6 +8,10 @@ textarea {
     font-size: 16px;
 }
 
+body {
+    margin: 0;
+}
+
 html {
     background-color: $background;
     color: $text;
@@ -30,6 +34,30 @@ html {
     }
 }
 
+.footer {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-block: 5px;
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0,0,0,.099);
+    display: flex;
+    font-size: 12px;
+    >* {
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        margin-inline-start: 0;
+        margin-inline-end: 2ch;
+        color: inherit;
+    }
+
+    >*:first-child {
+        margin-inline-start: 15px;
+    }
+}
+  
 .input-container {
     $border-rad: 25px;
     display: flex;
