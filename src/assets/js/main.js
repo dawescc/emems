@@ -1,20 +1,26 @@
+const targetElement = document.querySelector(".input-container");
+const memoInput = document.querySelector("#memo-input");
+const button = document.querySelector("#submit");
+const modal = document.querySelector("#modal");
+
 // Focus on Text bar on load
-window.addEventListener("load", function() {
-  const memoInput = document.querySelector("#memo-input");
-  memoInput.focus();
-});
+function autoFocus() {
+  window.addEventListener("load", function() {
+    memoInput.focus();
+  });
+} autoFocus();
 
-// Close the modal
-var modal = document.getElementById("modal");
-var good_modal = document.getElementById("success");
-var closeBtn = document.getElementsByClassName("close")[0];
+// Failure! Modal Function
 
-closeBtn.onclick = function() {
+function runModal() {
+  modal.style.display = "block";
+}
+
+function closeModal() {
   modal.style.display = "none";
-  good_modal.style.display = "none";
-};
+}
 
-// Confetti function
+// Success! Confetti Function
 function runConfetti() {
   var duration = 1.75 * 1000;
   var animationEnd = Date.now() + duration;
@@ -35,95 +41,144 @@ function runConfetti() {
     confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
     confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
   }, 250);
-};
+}
 
 // Send Memo function
 function sendMemo() {
   var memoContent = document.getElementById("memo-input").value;
   if (memoContent === "") {
-    // if the text input field is empty, show the modal pop up
-    modal.style.display = "block";
-  } else {
-    // otherwise, send the memo data via HTTP POST request
+  // Field Empty
+    // show modal
+    runModal();
+    } else {
+    // Field not Empty
+    // hide modal (if open)
     modal.style.display = "none";
+    // set content to input data
     var memoData = {
       "content": memoContent
     };
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://memos.dawes.casa/api/memo?openId=05d3578b-8672-447c-8fff-dec4db3df6dc");
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(JSON.stringify(memoData));
-      runConfetti();
-      document.getElementById("memo-input").value = ""; // clear the text box
-      const targetElement = document.querySelector(".input-container"); // remove green bolt
-      targetElement.classList.remove("active");
-  }
+    // Send HTTP Request
+    fetch('https://memos.dawes.casa/api/memo?openId=05d3578b-8672-447c-8fff-dec4db3df6dc', {
+      method: 'POST',
+      body: JSON.stringify(memoData),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        // Successful
+        if (response.ok) {
+          console.log('Memo added successfully');
+          // update the feed
+          refreshRSS();
+          // clear the text box
+          document.getElementById("memo-input").value = "";
+          // remove indicators
+          targetElement.classList.remove("active");
+          // celebrate!
+          runConfetti();
+        // Unsuccessful
+        } else {
+          // log it
+          console.error('Failed to add memo');
+        }
+      })
+      // if any error, log it
+      .catch(error => console.error(error));
+    }
+
+}
+
+function deleteMemo(id) {
+  // Construct the URL with the ID parameter
+  const url = `https://memos.dawes.casa/api/memo/${id}?openId=05d3578b-8672-447c-8fff-dec4db3df6dc`;
+  
+  // Send the DELETE request with fetch()
+  fetch(url, {
+    method: 'DELETE'
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log(`Item ${id} deleted successfully.`);
+      refreshRSS();
+    } else {
+      console.error(`Error deleting item ${id}: ${response.status} ${response.statusText}`);
+    }
+  })
+  .catch(error => {
+    console.error(`Error deleting item ${id}: ${error}`);
+  });
 }
 
 // Enter = sendMemo()
 // Shift + Enter = New Line
-const input = document.getElementById('memo-input');
-const button = document.getElementById('submit');
   // When button is pressed down
-input.addEventListener('keydown', event => {
+memoInput.addEventListener('keydown', event => {
   if (event.key === 'Enter' && !event.shiftKey) {
     event.preventDefault();
-    button.style.setProperty("background-color", "rgba(0,0,0, .25)", "important");
   }
 });
   // When button is released
-input.addEventListener('keyup', event => {
+memoInput.addEventListener('keyup', event => {
   if (event.key === 'Enter' && !event.shiftKey) {
     event.preventDefault();
     button.click();
-    button.style.setProperty("background-color", "rgba(0,0,0, .00)", "important");
   }
 });
 
 // RSS Feed for Recent Posts
-fetch('https://memos.dawes.casa/explore/rss.xml')
-.then(response => response.text())
-.then(xmlString => {
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(xmlString, 'application/xml');
-    const items = xml.querySelectorAll('item');
-    const postsContainer = document.getElementById('posts');
-    items.forEach(item => {
-        const title = item.querySelector('title').textContent;
-        const link = item.querySelector('link').textContent;
-        const description = item.querySelector('description').textContent;
-        const post = document.createElement('div');
-        post.className = 'post';
-        post.innerHTML = `<a target="_blank" href="${link}"><p>${description}</p></a>`;
-        postsContainer.appendChild(post);
-    });
-    if (!postsContainer.hasChildNodes()) {
-      const pubby = xml.querySelectorAll('pubDate');
-      const pubbydate = pubby[0].innerHTML
-      const nopost = document.createElement('div');
-      nopost.className = 'nopost';
-      nopost.innerHTML =
-      
-      `<p style="text-align:center;">
-      <i style="font-size:2.5rem;" class="fa-regular fa-thumbs-down"></i>
-      <br /><br />
-      Ain't shit here, Chief
-      <br /><br />
-      Last Checked: ${pubbydate}</p>`;
+function getRSS() {
+  fetch('https://memos.dawes.casa/explore/rss.xml')
+  .then(response => response.text())
+  .then(xmlString => {
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(xmlString, 'application/xml');
+      const items = xml.querySelectorAll('item');
+      const postsContainer = document.getElementById('posts');
+      items.forEach(item => {
+          const title = item.querySelector('title').textContent;
+          const link = item.querySelector('link').textContent;
+          const id = link.substring(link.lastIndexOf('/') + 1);
+          const description = item.querySelector('description').textContent;
+          const post = document.createElement('div');
+          post.className = 'post';
+          post.id = `${id}`;
+          post.innerHTML = 
+          `<a id="${id}" target="_blank" href="${link}">
+            <p>${description}</p>
+          </a>
+          <i id="trash" onclick="deleteMemo(${id})" class="fa-solid fa-trash-can"></i>`;
+          postsContainer.appendChild(post);
+      });
+      if (!postsContainer.hasChildNodes()) {
+        const pubby = xml.querySelectorAll('pubDate');
+        const pubbydate = pubby[0].innerHTML
+        const nopost = document.createElement('div');
+        nopost.className = 'nopost';
+        nopost.innerHTML = 
+        `<p><i class="fa-regular fa-thumbs-down"></i>
+        Ain't shit here Chief
+        <br /><br />
+        Last Checked: ${pubbydate}</p>`;
+  
+        postsContainer.appendChild(nopost);
+      }
+  })
+  .catch(error => {
+      console.log(error);
+  });
+} getRSS();
 
-      postsContainer.appendChild(nopost);
-    }
-})
-.catch(error => {
-    console.log(error);
-});
+function refreshRSS() {
+  const postsContainer = document.querySelector('#posts');
+  postsContainer.innerHTML = ''; // Clear existing posts
 
-
+  // Call the getRSS() function to fetch and render new posts
+  getRSS();
+}
 // When text is present, allow resizing up to 50% height
 // change color of bolt to green
-const memoInput = document.querySelector("#memo-input");
-const targetElement = document.querySelector(".input-container");
-
 memoInput.addEventListener("input", function() {
   if (memoInput.value.trim() !== "") {
     targetElement.classList.add("active");
@@ -135,14 +190,15 @@ memoInput.addEventListener("input", function() {
 });
 
 // Version Meta Tag
-
-// create the meta tag with the unique ID and formatted last modified date
-var meta = document.createElement('meta');
-meta.setAttribute('name', 'version');
-var lastModifiedDate = new Date(document.lastModified);
-meta.setAttribute('content', lastModifiedDate.toISOString());
-
-// append the meta tag to the head of the document
-var head = document.getElementsByTagName('head')[0];
-head.appendChild(meta);
+function tagit() {
+  // create the meta tag with the unique ID and formatted last modified date
+  var meta = document.createElement('meta');
+  meta.setAttribute('name', 'version');
+  var lastModifiedDate = new Date(document.lastModified);
+  meta.setAttribute('content', lastModifiedDate.toISOString());
+  
+  // append the meta tag to the head of the document
+  var head = document.getElementsByTagName('head')[0];
+  head.appendChild(meta);
+} tagit();
 
