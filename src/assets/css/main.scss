@@ -10,7 +10,7 @@ textarea {
 
 body {
     margin: 0;
-    background: linear-gradient(to bottom, $background 0%, black 100%);
+    background: linear-gradient(to bottom, $background 45%, black 100%);
 }
 
 html {
@@ -43,7 +43,7 @@ html {
     padding-block: 5px;
     position: fixed;
     bottom: 0;
-    background-color: rgba(0,0,0,.099);
+    background-color: transparent;
     display: flex;
     font-size: 12px;
     >* {
@@ -164,10 +164,16 @@ h3#recents {
         float: inline-end;
         font-size:smaller;
         margin-top: .5ch;
-        transition: all .2s ease;
+        transition: scale .2s ease;
+        transition: transform .5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
     
         &:active {
             scale: 0.75;
+            transform: rotate(-90deg);
+        }
+
+        &.clicked {
+            transform: rotate(180deg);
         }
     
     }
@@ -215,7 +221,7 @@ div#posts {
     .nopost {
         text-align:center;
         font-style: italic;
-        color: rgb(53, 53, 53);
+        color: #424242;
         text-decoration: none;
 
         p {

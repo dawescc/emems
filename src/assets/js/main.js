@@ -172,11 +172,24 @@ function getRSS() {
 
 function refreshRSS() {
   const postsContainer = document.querySelector('#posts');
-  postsContainer.innerHTML = ''; // Clear existing posts
+  postsContainer.innerHTML = ``; // Clear existing posts
 
   // Call the getRSS() function to fetch and render new posts
   getRSS();
 }
+
+// Refresh Button Animation
+const refButton = document.getElementById("refresh");
+
+// Add a click event listener to the element
+refButton.addEventListener("mouseup", function() {
+  // Toggle the "active" class on the element
+  refButton.classList.toggle("clicked");
+  setTimeout(function() {
+    refButton.classList.toggle("clicked");
+  }, 350);
+});
+
 // When text is present, allow resizing up to 50% height
 // change color of bolt to green
 memoInput.addEventListener("input", function() {
@@ -201,4 +214,5 @@ function tagit() {
   var head = document.getElementsByTagName('head')[0];
   head.appendChild(meta);
 } tagit();
+
 
