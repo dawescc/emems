@@ -1,4 +1,5 @@
-const targetElement = document.querySelector(".input-container");
+const inputCon = document.querySelector(".input-container");
+const bolt = document.querySelector("#bolt");
 const memoInput = document.querySelector("#memo-input");
 const button = document.querySelector("#submit");
 const modal = document.querySelector("#modal");
@@ -13,6 +14,7 @@ function autoFocus() {
 // Failure! Modal Function
 
 function runModal() {
+  vibrate();
   modal.style.display = "block";
 }
 
@@ -70,13 +72,14 @@ function sendMemo() {
         // Successful
         if (response.ok) {
           console.log('Memo added successfully');
-          // update the feed
-          refreshRSS();
           // clear the text box
           document.getElementById("memo-input").value = "";
           // remove indicators
-          targetElement.classList.remove("active");
+          bolt.classList.remove("active");
           // celebrate!
+          fly();
+          // update the feed
+          refreshRSS();
           runConfetti();
         // Unsuccessful
         } else {
@@ -181,9 +184,7 @@ function refreshRSS() {
 // Refresh Button Animation
 const refButton = document.getElementById("refresh");
 
-// Add a click event listener to the element
 refButton.addEventListener("mouseup", function() {
-  // Toggle the "active" class on the element
   refButton.classList.toggle("clicked");
   setTimeout(function() {
     refButton.classList.toggle("clicked");
@@ -194,10 +195,10 @@ refButton.addEventListener("mouseup", function() {
 // change color of bolt to green
 memoInput.addEventListener("input", function() {
   if (memoInput.value.trim() !== "") {
-    targetElement.classList.add("active");
+    bolt.classList.add("active");
     memoInput.classList.add("sizeable");
   } else {
-    targetElement.classList.remove("active");
+    bolt.classList.remove("active");
     memoInput.classList.remove("sizeable");
   }
 });
@@ -215,4 +216,22 @@ function tagit() {
   head.appendChild(meta);
 } tagit();
 
+// No Input - Vibrate
+function vibrate() {
+  if (bolt) {
+    bolt.classList.add("wiggle");
+    setTimeout(function() {
+      bolt.classList.remove("wiggle");
+    }, 250); // Remove the wiggle class after .25 seconds
+  }
+}
 
+// Succesful Input - Fly
+function fly() {
+  if (button) {
+    button.classList.add("fly");
+    setTimeout(function() {
+      button.classList.remove("fly");
+    }, 1200); // Remove the fly class after 1.5 seconds
+  }
+}

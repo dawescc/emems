@@ -10,11 +10,11 @@ textarea {
 
 body {
     margin: 0;
-    background: linear-gradient(to bottom, $background 45%, black 100%);
+    background: linear-gradient(to bottom, $background 45%, $sitebg 100%);
 }
 
 html {
-    background-color: black;
+    background-color: $sitebg;
     color: $text;
     font-size: 16px;
 
@@ -24,7 +24,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95vh;
+    height: 100vh;
     flex-direction: column;
     overflow: hidden;
 
@@ -32,7 +32,7 @@ html {
         max-width: 750px;
         width: percentage($number: calc(725/750));
         margin-inline: auto;
-        overflow: hidden;
+        overflow: visible;
     }
 }
 
@@ -46,6 +46,7 @@ html {
     background-color: transparent;
     display: flex;
     font-size: 12px;
+    box-shadow: 0px -5px 6px rgba(0, 0, 0, 0.15);
     >* {
         text-decoration: none;
         margin: 0;
@@ -68,20 +69,38 @@ html {
     border: 1.5px solid $border;
     border-radius: $border-rad;
     background-color: transparent;
-    &::before {
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        content: "\f0e7";
-        color: pink;
-        padding-inline: 12px 0px;
-    }
-    &.active::before {
-        color: mediumseagreen;
-      }
+    position: relative;
 
     &:focus-within {
         background-color: #262626;  
     }
+
+    #bolt {
+        color: $red;
+        padding-inline: 12px 0px;
+        
+        &.active {
+            color: $green;
+        }
+
+        &.wiggle {
+            animation: vibrate .095s infinite, scale .1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+          }
+
+        @keyframes vibrate {
+            0% { transform: translate3d(1.5px,0px,0) rotate(3deg) }
+            25% { transform: translate3d(0px,-1.5px,0) rotate(-3deg) }
+            75% { transform: translate3d(-1.5px,0px,0) rotate(3deg) }
+            100% { transform: translate3d(0px,1.5px,0) rotate(-3deg) }
+        }
+
+        @keyframes scale {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2);}
+            100% { transform: scale(1.5); }
+        }
+    }
+
 
     .memo-input {
         font-weight: bold;
@@ -117,10 +136,37 @@ html {
         }
 
         &:active {
-            color: darkgray;
+            color: $green;
         }
+
+        &.fly {
+            animation: flying .35s linear forwards;
+
+            @keyframes flying {
+                0% {
+                    transform: translateY(0) scale(1);
+                    opacity: 1;
+                  }
+
+                10% {
+                    position: absolute;
+                    right: 0px;
+                    transform: translateY(10px) translateX(-10px) scale(1.2);
+                  }
+
+                50% {
+                    opacity: .25;
+                }
+                100% {
+                    transform: translateY(-50px) translateX(50) scale(0.5);
+                    opacity: 0;
+                }
+                }
+            }
+        }
+
     }
-}
+
 
 .modal {
     display: none;
@@ -129,8 +175,8 @@ html {
     bottom: 15px;
     right: 15px;
     transition: all 2s ease;
-    background-color: rgba($color: pink, $alpha: .75);
-    color: black;
+    background-color: rgba($color: $red, $alpha: .5);
+    color: $text;
     text-align: center;
     border-radius: 10px;
     padding-inline: 10px;
@@ -156,7 +202,7 @@ html {
 h3#recents {
     align-self: flex-start;
     margin-top: 7vh;
-    font-size: 20px;
+    font-size: 18px;
     padding-bottom: 10px;
     border-bottom: 1px solid $border;
     
@@ -170,10 +216,12 @@ h3#recents {
         &:active {
             scale: 0.75;
             transform: rotate(-90deg);
+            color: lightgrey;
         }
 
         &.clicked {
             transform: rotate(180deg);
+            color: $green;
         }
     
     }
@@ -184,10 +232,12 @@ div#posts {
     flex-direction: column;
     max-height: 75vh;
     overflow-y: auto;
+    padding-inline: 10px;
 
     .post {
         border-radius: 12px;
-        background-color: #262626;
+        background-color: rgba($color: #202020, $alpha: .35);
+        backdrop-filter: blur(1.5);
         border: 1px solid #262626;
         &:hover {
             background-color: #252525;
@@ -215,6 +265,12 @@ div#posts {
             margin: 5px;
             padding-inline: 4px;
             padding-block: 0px 4px;
+            &:hover {
+                color: lightgray;
+            }
+            &:active {
+                color: $red;
+            }
         }
     }
 
