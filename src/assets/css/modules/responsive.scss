@@ -10,14 +10,12 @@
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
-    #after-input {
-        padding-inline: 10px;
-    }
+    $ai-padding: 10px;
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-    
+    $ai-padding: 10px; 
 }
 
 // Large devices (desktops, 992px and up)

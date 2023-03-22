@@ -1,6 +1,9 @@
+///// Import Styles
 @import './modules/colors.scss';
 @import './modules/fonts.scss';
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css');
+
+///// Global Base Styles
 
 :root,
 textarea {
@@ -21,6 +24,8 @@ html {
     overflow: hidden;
 }
 
+///// Page Containers
+/// and Wrappers
 .container {
     display: flex;
     justify-content: center;
@@ -37,6 +42,8 @@ html {
     }
 }
 
+///// Sticky Footer
+/// and Objects
 .footer {
     width: 100%;
     margin: 0;
@@ -61,7 +68,9 @@ html {
         margin-inline-start: 15px;
     }
 }
-  
+
+///// Input Container
+/// and Objects
 .input-container {
     $border-rad: 25px;
     display: flex;
@@ -102,7 +111,6 @@ html {
         }
     }
 
-
     .memo-input {
         font-weight: bold;
         background-color: transparent;
@@ -125,6 +133,7 @@ html {
 
 
     }
+
     .send-button {
         background-color: transparent;
         color: $text;
@@ -164,11 +173,10 @@ html {
                 }
                 }
             }
-        }
-
     }
+}
 
-
+///// Failure Modal
 .modal {
     display: none;
 
@@ -190,6 +198,13 @@ html {
     .modal-content {
         padding-block: 5px;
     }
+}
+
+///// After Input Container
+/// and Objects
+#after-input {
+    $ai-padding: 0px;
+    padding-inline: $ai-padding;
 }
 
 h3#recents {
@@ -287,9 +302,6 @@ div#posts {
         }
     }
 }
-  
 
 ///// Media Queries
-/// 
-
 @import './modules/responsive.scss';
