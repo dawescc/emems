@@ -5,11 +5,3 @@ $border: #383838;
 
 $green: mediumseagreen;
 $red: tomato;
-
-
-@media (prefers-color-scheme: light) {
-    $background: #dadada;
-    $sitebg: #f9f9f9;
-    $text: #101010;
-    $border: #c0c0c0;
-}

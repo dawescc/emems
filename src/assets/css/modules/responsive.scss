@@ -1,6 +1,18 @@
+// Prefers Light Mode
+
+@media (prefers-color-scheme: light) {
+    $background: #dadada;
+    $sitebg: #f9f9f9;
+    $text: #101010;
+    $border: #c0c0c0;
+}
+
+
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
-    
+    #after-input {
+        padding-inline: 10px;
+    }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -19,4 +31,3 @@
 // XX-Large devices (larger desktops, 1400px and up)
 @media (min-width: 1400px) {
 }
-
