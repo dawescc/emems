@@ -56,7 +56,8 @@ function sendMemo() {
     // show modal
     runModal();
     } else {
-    // Field not Empty
+      // Field not Empty
+    fly();
     // hide modal (if open)
     modal.style.display = "none";
     // set content to input data
@@ -80,7 +81,6 @@ function sendMemo() {
           // remove indicators
           bolt.classList.remove("active");
           // celebrate!
-          fly();
           // update the feed
           refreshRSS();
           runConfetti();
