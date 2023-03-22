@@ -11,16 +11,16 @@ textarea {
     font-size: 16px;
 }
 
-body {
-    margin: 0;
-    background: linear-gradient(to bottom, $background 45%, $sitebg 100%);
-    overflow: hidden;
-}
-
 html {
     background-color: $sitebg;
     color: $text;
     font-size: 16px;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, $background 33%, $sitebg 90%);
     overflow: hidden;
 }
 
@@ -38,7 +38,11 @@ html {
         max-width: 750px;
         width: percentage($number: calc(725/750));
         margin-inline: auto;
-        overflow: visible;
+        overflow: auto;
+
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
 }
 
@@ -50,11 +54,11 @@ html {
     padding: 0;
     padding-block: 5px;
     position: fixed;
+    background: linear-gradient(to top, $sitebg 60%, transparent 100%);
     bottom: 0;
-    background-color: #101010;
     display: flex;
     font-size: 12px;
-    box-shadow: 0px -5px 6px rgba(0, 0, 0, 0.15);
+    
     >* {
         text-decoration: none;
         margin: 0;
@@ -73,22 +77,29 @@ html {
 /// and Objects
 .input-container {
     $border-rad: 25px;
+
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
+
     border: 1.5px solid $border;
     border-radius: $border-rad;
     background-color: transparent;
+
+    margin-block: 5px;
     position: relative;
+    margin-top: 35px;
 
     &:focus-within {
-        background-color: #262626;  
+        background-color: rgba($color: #383838, $alpha: .055);  
     }
 
     #bolt {
         color: $red;
-        padding-inline: 12px 0px;
-        
+        margin-inline: 15px 10px;
+        margin-block: 5px;
+
         &.active {
             color: $green;
         }
@@ -116,11 +127,14 @@ html {
         background-color: transparent;
         color: $text;
         border: none;
-        flex-grow: 2;
+
+        margin:0;
+        padding:0;
+
         resize: none;
-        padding-block: 5px;
-        margin-inline: 10px 4px;
         min-height: 20px;
+
+        flex-grow: 2;
 
         &:focus {
             outline: none;
@@ -139,10 +153,11 @@ html {
         color: $text;
         border: none;
         cursor: pointer;
-        padding-inline: 5px 12px;
+        margin-inline: 10px 15px;
+        margin-block: 5px;
 
         &:hover {
-            color: lightgray;
+            color: $accenttxt;
         }
 
         &:active {
@@ -203,105 +218,109 @@ html {
 ///// After Input Container
 /// and Objects
 #after-input {
-    $ai-padding: 0px;
-    padding-inline: $ai-padding;
-}
+    margin-top: 5vh;
+    padding: 7.5px;
+    background-color: $red;
+    border-radius: 15px;
+    flex-grow: 2;
+    background: linear-gradient(to bottom, $background 55%, $sitebg 95%);
+    height: 75vh;
+    overflow: hidden;
 
-h3#recents {
-    align-self: flex-start;
-    margin-top: 7vh;
-    font-size: 18px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid $border;
-    
-    i#refresh {
-        float: inline-end;
-        font-size:smaller;
-        margin-top: .5ch;
-        transition: scale .2s ease;
-        transition: transform .5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-    
-        &:active {
-            scale: 0.75;
-            transform: rotate(-90deg);
-            color: lightgrey;
-        }
-
-        &.clicked {
-            transform: rotate(180deg);
-            color: $green;
-        }
-    
-    }
-}
-
-div#posts {
-    display: flex;
-    flex-direction: column;
-    max-height: 75vh;
-    overflow-y: auto;
-    padding-inline: 10px;
-
-    .post {
-        border-radius: 12px;
-        background-color: rgba($color: #202020, $alpha: .35);
-        backdrop-filter: blur(1.5);
-        border: 1px solid #262626;
-        &:hover {
-            background-color: #252525;
-            border: 1px solid $border;
-        }
-        margin-top: 10px;
-        padding-top: 5px;
-
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            margin: 0;
-            padding: 0;
-
-            p {
-                margin-inline: 0;
-                padding: 0;
-                padding-inline: 12px;
-            }
-        }
-
-        #trash {
-            float: inline-end;
-            margin: 5px;
-            padding-inline: 4px;
-            padding-block: 0px 4px;
-            &:hover {
-                color: lightgray;
-            }
+    h3#recents {
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 18px;
+        border-bottom: 1px solid $border;
+        
+        i#refresh {
+            float: right;
+            font-size:smaller;
+            margin-top: .5ch;
+            transition: scale .2s ease;
+            transition: transform .5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        
             &:active {
-                color: $red;
+                scale: 0.75;
+                transform: rotate(-90deg);
+                color: $accenttxt;
             }
+    
+            &.clicked {
+                transform: rotate(180deg);
+                color: $green;
+            }
+        
         }
     }
-
-    .nopost {
-        text-align:center;
-        font-style: italic;
-        color: #424242;
-        text-decoration: none;
-
-        p {
-            margin: 0;
-            padding: 0;
-         
-            i {
-                font-size:2.5rem;
+    
+    div#posts {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow-y: auto;
+        padding-inline: 10px;
+    
+        .post {
+            border-radius: 12px;
+            background-color: rgba($color: #383838, $alpha: .055);
+            backdrop-filter: blur(1.5);
+            border: 1px solid rgba($color: $border, $alpha: .55);
+            &:hover {
+                background-color: rgba($color: #383838, $alpha: .11);  
+                border: 1px solid $border;
+            }
+            margin-top: 10px;
+            padding-top: 5px;
+    
+    
+            a {
+                text-decoration: none;
+                color: inherit;
                 margin: 0;
-                margin-bottom: 12px;
                 padding: 0;
-                display: block;
+    
+                p {
+                    margin-inline: 0;
+                    padding: 0;
+                    padding-inline: 12px;
+                    word-break: break-all;
+                }
+            }
+    
+            #trash {
+                float: inline-end;
+                margin: 5px;
+                padding-inline: 4px;
+                padding-block: 0px 4px;
+                &:hover {
+                    color: $accenttxt;
+                }
+                &:active {
+                    color: $red;
+                }
+            }
+        }
+    
+        .nopost {
+            text-align:center;
+            font-style: italic;
+            color: $accenttxt;
+            text-decoration: none;
+    
+            p {
+                margin: 0;
+                padding: 0;
+             
+                i {
+                    font-size:2.5rem;
+                    margin: 0;
+                    margin-bottom: 12px;
+                    padding: 0;
+                    display: block;
+                }
             }
         }
     }
 }
-
-///// Media Queries
-$ai-padding: 100px;

@@ -164,7 +164,7 @@ function getRSS() {
         nopost.className = 'nopost';
         nopost.innerHTML = 
         `<p><i class="fa-regular fa-thumbs-down"></i>
-        Ain't shit here Chief
+        ${getRandomEmptyText()}
         <br /><br />
         Last Checked: ${pubbydate}</p>`;
   
@@ -237,4 +237,31 @@ function fly() {
       button.classList.remove("fly");
     }, 1200); // Remove the fly class after 1.5 seconds
   }
+}
+
+//Random Phrase
+function getRandomEmptyText() {
+  const emptyTexts = [
+    "There ain't shit here, chief.",
+    "Looks like a barren wasteland, partner.",
+    "This page is about as empty as my bank account.",
+    "Nothing to see here, move along.",
+    "You've stumbled upon a void, my friend.",
+    "This is not the web page you're looking for.",
+    "404: Page not found, but at least the background is pretty.",
+    "Looks like this page is taking a long nap.",
+    "Sorry, this page is on vacation.",
+    "The page you are looking for has left the building.",
+    "Looks like we hit a dead end.",
+    "You've reached the end of the internet, try again later.",
+    "This page is feeling a little empty today.",
+    "Looks like this page is on sabbatical.",
+    "You've entered the abyss of the internet.",
+    "Looks like someone forgot to put content here.",
+    "Nothing to do here, except leave.",
+    "Seems like this page is taking a break.",
+    "Oops! The page you are looking for is MIA."
+];
+  const randomIndex = Math.floor(Math.random() * emptyTexts.length);
+  return emptyTexts[randomIndex];
 }
