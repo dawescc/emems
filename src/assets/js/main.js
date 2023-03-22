@@ -11,8 +11,17 @@ function autoFocus() {
   });
 } autoFocus();
 
-// Failure! Modal Function
+// No Input - Vibrate
+function vibrate() {
+  if (bolt) {
+    bolt.classList.add("wiggle");
+    setTimeout(function() {
+      bolt.classList.remove("wiggle");
+    }, 250); // Remove the wiggle class after .25 seconds
+  }
+}
 
+// No Input - Modal Function
 function runModal() {
   vibrate();
   modal.style.display = "block";
@@ -20,12 +29,12 @@ function runModal() {
     closeModal();
   }, 3000);
 }
-
+// No Input - Close Modal Function
 function closeModal() {
   modal.style.display = "none";
 }
 
-// Success! Confetti Function
+// Succesful Input Confetti Function
 function runConfetti() {
   var duration = 1.75 * 1000;
   var animationEnd = Date.now() + duration;
@@ -46,6 +55,16 @@ function runConfetti() {
     confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
     confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
   }, 250);
+}
+
+// Succesful Input - Fly
+function fly() {
+  if (button) {
+    button.classList.add("fly");
+    setTimeout(function() {
+      button.classList.remove("fly");
+    }, 1200); // Remove the fly class after 1.5 seconds
+  }
 }
 
 // Send Memo function
@@ -95,7 +114,7 @@ function sendMemo() {
     }
 
 }
-
+// Delete Memo Function
 function deleteMemo(id) {
   // Construct the URL with the ID parameter
   const url = `https://memos.dawes.casa/api/memo/${id}?openId=05d3578b-8672-447c-8fff-dec4db3df6dc`;
@@ -150,13 +169,17 @@ function getRSS() {
           const post = document.createElement('div');
           post.className = 'post';
           post.id = `${id}`;
+          const posttxtid =`${id}_text`
+          console.log(posttxtid)
           post.innerHTML = 
           `<a id="${id}" target="_blank" href="${link}">
-            <p>${description}</p>
+            <p id="${id}_text"></p>
           </a>
           <i id="trash" onclick="deleteMemo(${id})" class="fa-solid fa-trash-can"></i>`;
           postsContainer.appendChild(post);
+          typeWriter(description, posttxtid)
       });
+
       if (!postsContainer.hasChildNodes()) {
         const pubby = xml.querySelectorAll('pubDate');
         const pubbydate = pubby[0].innerHTML
@@ -176,6 +199,7 @@ function getRSS() {
   });
 } getRSS();
 
+// Refresh Posts
 function refreshRSS() {
   const postsContainer = document.querySelector('#posts');
   postsContainer.innerHTML = ``; // Clear existing posts
@@ -219,27 +243,7 @@ function tagit() {
   head.appendChild(meta);
 } tagit();
 
-// No Input - Vibrate
-function vibrate() {
-  if (bolt) {
-    bolt.classList.add("wiggle");
-    setTimeout(function() {
-      bolt.classList.remove("wiggle");
-    }, 250); // Remove the wiggle class after .25 seconds
-  }
-}
-
-// Succesful Input - Fly
-function fly() {
-  if (button) {
-    button.classList.add("fly");
-    setTimeout(function() {
-      button.classList.remove("fly");
-    }, 1200); // Remove the fly class after 1.5 seconds
-  }
-}
-
-//Random Phrase
+//Random Phrases
 function getRandomEmptyText() {
   const emptyTexts = [
     "There ain't shit here, chief.",
@@ -265,3 +269,17 @@ function getRandomEmptyText() {
   const randomIndex = Math.floor(Math.random() * emptyTexts.length);
   return emptyTexts[randomIndex];
 }
+
+// Typed Text
+function typeWriter(text, elementId) {
+  const element = document.getElementById(elementId);
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++; 
+      setTimeout(type, .025);
+    }
+  }
+  type();
+} 
