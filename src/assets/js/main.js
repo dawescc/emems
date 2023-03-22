@@ -173,11 +173,10 @@ function getRSS() {
           console.log(posttxtid)
           post.innerHTML = 
           `<a id="${id}" target="_blank" href="${link}">
-            <p id="${id}_text"></p>
+            <p id="${id}_text">${description}</p>
           </a>
           <i id="trash" onclick="deleteMemo(${id})" class="fa-solid fa-trash-can"></i>`;
           postsContainer.appendChild(post);
-          typeWriter(description, posttxtid)
       });
 
       if (!postsContainer.hasChildNodes()) {
@@ -189,7 +188,7 @@ function getRSS() {
         `<p><i class="fa-regular fa-thumbs-down"></i>
         ${getRandomEmptyText()}
         <br /><br />
-        Last Checked: ${pubbydate}</p>`;
+        <lcheck>Last Checked: ${pubbydate}</lcheck></p>`;
   
         postsContainer.appendChild(nopost);
       }
@@ -272,14 +271,17 @@ function getRandomEmptyText() {
 
 // Typed Text
 function typeWriter(text, elementId) {
+  function getRandomNumber() {
+    return Math.floor(Math.random() * 66) + 33;
+  }
   const element = document.getElementById(elementId);
   let i = 0;
   function type() {
     if (i < text.length) {
       element.innerHTML += text.charAt(i);
       i++; 
-      setTimeout(type, .025);
+      setTimeout(type, getRandomNumber());
     }
   }
   type();
-} 
+} typeWriter("Posts", "recents")

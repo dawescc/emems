@@ -310,6 +310,7 @@ body {
             font-style: italic;
             color: $accenttxt;
             text-decoration: none;
+            margin-top: 50%;
     
             p {
                 margin: 0;
@@ -323,9 +324,12 @@ body {
                     display: block;
                 }
 
-                &#lastcheck {
-                    
-                }
+            }
+            lcheck {
+                opacity: .90;
+                font-size: smaller;
+                font-style: bold;
+                font-variant: small-caps;
             }
         }
     }
