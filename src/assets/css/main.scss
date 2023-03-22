@@ -11,13 +11,14 @@ textarea {
 body {
     margin: 0;
     background: linear-gradient(to bottom, $background 45%, $sitebg 100%);
+    overflow: hidden;
 }
 
 html {
     background-color: $sitebg;
     color: $text;
     font-size: 16px;
-
+    overflow: hidden;
 }
 
 .container {
@@ -43,7 +44,7 @@ html {
     padding-block: 5px;
     position: fixed;
     bottom: 0;
-    background-color: transparent;
+    background-color: #101010;
     display: flex;
     font-size: 12px;
     box-shadow: 0px -5px 6px rgba(0, 0, 0, 0.15);
