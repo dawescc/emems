@@ -16,6 +16,9 @@ function autoFocus() {
 function runModal() {
   vibrate();
   modal.style.display = "block";
+  setTimeout(function() {
+    closeModal();
+  }, 3000);
 }
 
 function closeModal() {
