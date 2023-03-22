@@ -228,6 +228,10 @@ body {
     background: linear-gradient(to bottom, $sitebg -55%, $background 55%, $sitebg 95%);
     height: 75vh;
     overflow: hidden;
+    margin-inline: 0.25em;
+    position: relative;
+
+    box-shadow: 0px 0px 10px rgba($color: $sitebg, $alpha: .5);
 
     h3#recents {
         margin: 0;
@@ -245,12 +249,12 @@ body {
         
             &:active {
                 scale: 0.75;
-                transform: rotate(-90deg);
+                transform: rotatez(-90deg);
                 color: $accenttxt;
             }
     
             &.clicked {
-                transform: rotate(180deg);
+                transform: rotatez(180deg);
                 color: $green;
             }
         

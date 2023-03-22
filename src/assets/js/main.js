@@ -263,25 +263,23 @@ function getRandomEmptyText() {
     "Looks like someone forgot to put content here.",
     "Nothing to do here, except leave.",
     "Seems like this page is taking a break.",
-    "Oops! The page you are looking for is MIA."
-];
+    "Oops! The page you are looking for is MIA.",
+    "The place is drier than a bone in the desert.",
+    "One might as well be walking through an empty void, because that's exactly what it is.",
+    "The area is about as lively as a funeral procession.",
+    "One could be forgiven for thinking it's just an elaborate prank, because there's nothing there.",
+    "The chance of finding something interesting there is like finding a needle in a haystack.",
+    "It's like someone took a vacuum cleaner to the area and sucked all the life out of it.",
+    "A tumbleweed could roll by, that's how empty it is.",
+    "The place is about as exciting as watching paint dry.",
+    "One could host a party there, but the only guests would be crickets.",
+    "It's a ghost town, and there are no ghosts except for the emptiness.",
+    "The area is where dreams come to die.",
+    "The chance of finding something of interest there is like finding a pot of gold at the end of a rainbow.",
+    "The place is about as happening as a nursing home on bingo night.",
+    "A sloth would find the place boring.",
+    "There is nothing there to excite even the most adventurous souls."
+  ];
   const randomIndex = Math.floor(Math.random() * emptyTexts.length);
   return emptyTexts[randomIndex];
 }
-
-// Typed Text
-function typeWriter(text, elementId) {
-  function getRandomNumber() {
-    return Math.floor(Math.random() * 66) + 33;
-  }
-  const element = document.getElementById(elementId);
-  let i = 0;
-  function type() {
-    if (i < text.length) {
-      element.innerHTML += text.charAt(i);
-      i++; 
-      setTimeout(type, getRandomNumber());
-    }
-  }
-  type();
-} typeWriter("Posts", "recents")
