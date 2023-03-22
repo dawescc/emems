@@ -186,9 +186,9 @@ function getRSS() {
         nopost.className = 'nopost';
         nopost.innerHTML = 
         `<p><i class="fa-regular fa-thumbs-down"></i>
-        ${getRandomEmptyText()}
-        <br /><br />
-        <lcheck>Last Checked: ${pubbydate}</lcheck></p>`;
+        ${getRandomEmptyText()}</p>
+        <br />
+        <p id="lcheck">Checked: ${pubbydate}</p>`;
   
         postsContainer.appendChild(nopost);
       }

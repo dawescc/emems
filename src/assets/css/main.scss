@@ -20,7 +20,7 @@ html {
 
 body {
     margin: 0;
-    background: linear-gradient(to bottom, $sitebg -200%, $background 33%, $sitebg 100%);
+    background: linear-gradient(to bottom, $sitebg -33%, $background 33%, $sitebg 100%);
     // background: linear-gradient(to bottom, $background 33%, $sitebg 90%);
     overflow: hidden;
 }
@@ -307,14 +307,19 @@ body {
     
         .nopost {
             text-align:center;
-            font-style: italic;
             color: $accenttxt;
-            text-decoration: none;
             margin-top: 50%;
     
             p {
                 margin: 0;
                 padding: 0;
+
+                &#lcheck {
+                    opacity: .90;
+                    font-size: x-small;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
              
                 i {
                     font-size:2.5rem;
@@ -324,12 +329,6 @@ body {
                     display: block;
                 }
 
-            }
-            lcheck {
-                opacity: .90;
-                font-size: smaller;
-                font-style: bold;
-                font-variant: small-caps;
             }
         }
     }
