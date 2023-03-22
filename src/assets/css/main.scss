@@ -225,7 +225,7 @@ body {
     background-color: $red;
     border-radius: 15px;
     flex-grow: 2;
-    background: linear-gradient(to bottom, $background 55%, $sitebg 95%);
+    background: linear-gradient(to bottom, $sitebg -55%, $background 55%, $sitebg 95%);
     height: 75vh;
     overflow: hidden;
 
