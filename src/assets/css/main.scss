@@ -1,0 +1,339 @@
+///// Import Styles
+@import './modules/colors.scss';
+@import './modules/fonts.scss';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css');
+
+///// Global Base Styles
+
+:root,
+textarea {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+
+html {
+    background-color: $sitebg;
+    color: $text;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, $sitebg -33%, $background 33%, $sitebg 100%);
+    // background: linear-gradient(to bottom, $background 33%, $sitebg 90%);
+    overflow: hidden;
+}
+
+///// Page Containers
+/// and Wrappers
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+
+    .content-wrapper {
+        max-width: 750px;
+        width: percentage($number: calc(725/750));
+        margin-inline: auto;
+        overflow: auto;
+
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+}
+
+///// Sticky Footer
+/// and Objects
+.footer {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-block: 5px;
+    position: fixed;
+    background: linear-gradient(to top, $sitebg 60%, transparent 100%);
+    bottom: 0;
+    display: flex;
+    font-size: 12px;
+    
+    >* {
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        margin-inline-start: 0;
+        margin-inline-end: 2ch;
+        color: inherit;
+    }
+
+    >*:first-child {
+        margin-inline-start: 15px;
+    }
+}
+
+///// Input Container
+/// and Objects
+.input-container {
+    $border-rad: 25px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border: 1.5px solid $border;
+    border-radius: $border-rad;
+    background-color: transparent;
+
+    margin-block: 5px;
+    position: relative;
+    margin-top: 35px;
+
+    &:focus-within {
+        background-color: rgba($color: #383838, $alpha: .055);  
+    }
+
+    #bolt {
+        color: $accenttxt;
+        margin-inline: 15px 10px;
+        margin-block: 5px;
+
+        &.active {
+            color: $green;
+        }
+
+        &.wiggle {
+            color: $red;
+            animation: vibrate .095s infinite, scale .1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+          }
+
+        @keyframes vibrate {
+            0% { transform: translate3d(1.5px,0px,0) rotate(3deg) }
+            25% { transform: translate3d(0px,-1.5px,0) rotate(-3deg) }
+            75% { transform: translate3d(-1.5px,0px,0) rotate(3deg) }
+            100% { transform: translate3d(0px,1.5px,0) rotate(-3deg) }
+        }
+
+        @keyframes scale {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2);}
+            100% { transform: scale(1.5); }
+        }
+    }
+
+    .memo-input {
+        font-weight: bold;
+        background-color: transparent;
+        color: $text;
+        border: none;
+
+        margin:0;
+        padding:0;
+
+        resize: none;
+        min-height: 20px;
+
+        flex-grow: 2;
+
+        &:focus {
+            outline: none;
+        }
+
+        &.sizeable {
+            max-height: 50vh;
+            resize: vertical;
+        }
+
+
+    }
+
+    .send-button {
+        background-color: transparent;
+        color: $text;
+        border: none;
+        cursor: pointer;
+        margin-inline: 10px 15px;
+        margin-block: 5px;
+
+        &:hover {
+            color: $accenttxt;
+        }
+
+        &:active {
+            color: $green;
+        }
+
+        &.fly {
+            animation: flying .35s linear forwards;
+
+            @keyframes flying {
+                0% {
+                    transform: translateY(0) scale(1);
+                    opacity: 1;
+                  }
+
+                10% {
+                    position: absolute;
+                    right: 0px;
+                    transform: translateY(10px) translateX(-10px) scale(1.2);
+                  }
+
+                50% {
+                    opacity: .25;
+                }
+                100% {
+                    transform: translateY(-50px) translateX(50) scale(0.5);
+                    opacity: 0;
+                }
+                }
+            }
+    }
+}
+
+///// Failure Modal
+.modal {
+    display: none;
+
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+
+    margin: 0;
+    padding: 0;
+    padding-block: 2px;
+
+    text-align: center;
+    
+    background-color: rgba($color: $red, $alpha: .45);
+    color: $text;
+    font-size: smaller;
+
+    .modal-content {
+        padding-block: 5px;
+    }
+}
+
+///// After Input Container
+/// and Objects
+#after-input {
+    margin-top: 5vh;
+    padding: 7.5px;
+    background-color: $red;
+    border-radius: 15px;
+    flex-grow: 2;
+    background: linear-gradient(to bottom, $sitebg -55%, $background 55%, $sitebg 95%);
+    height: 75vh;
+    overflow: hidden;
+    margin-inline: 0.25em;
+    position: relative;
+
+    box-shadow: 0px 0px 10px rgba($color: $sitebg, $alpha: .5);
+
+    h3#recents {
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 18px;
+        border-bottom: 1px solid $border;
+        
+        i#refresh {
+            float: right;
+            font-size:smaller;
+            margin-top: .5ch;
+            transition: scale .2s ease;
+            transition: transform .5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        
+            &:active {
+                scale: 0.75;
+                transform: rotatez(-90deg);
+                color: $accenttxt;
+            }
+    
+            &.clicked {
+                transform: rotatez(180deg);
+                color: $green;
+            }
+        
+        }
+    }
+    
+    div#posts {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow-y: auto;
+        padding-inline: 10px;
+    
+        .post {
+            border-radius: 12px;
+            background-color: rgba($color: #383838, $alpha: .055);
+            backdrop-filter: blur(1.5);
+            border: 1px solid rgba($color: $border, $alpha: .55);
+            &:hover {
+                background-color: rgba($color: #383838, $alpha: .11);  
+                border: 1px solid $border;
+            }
+            margin-top: 10px;
+            padding-top: 5px;
+    
+    
+            a {
+                text-decoration: none;
+                color: inherit;
+                margin: 0;
+                padding: 0;
+    
+                p {
+                    margin-inline: 0;
+                    padding: 0;
+                    padding-inline: 12px;
+                    word-break: break-all;
+                }
+            }
+    
+            #trash {
+                float: right;
+                margin: 5px;
+                padding-inline: 4px;
+                padding-block: 0px 4px;
+                &:hover {
+                    color: $accenttxt;
+                }
+                &:active {
+                    color: $red;
+                }
+            }
+        }
+    
+        .nopost {
+            text-align:center;
+            color: $accenttxt;
+            margin-top: 50%;
+    
+            p {
+                margin: 0;
+                padding: 0;
+
+                &#lcheck {
+                    opacity: .90;
+                    font-size: x-small;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+             
+                i {
+                    font-size:2.5rem;
+                    margin: 0;
+                    margin-bottom: 12px;
+                    padding: 0;
+                    display: block;
+                }
+
+            }
+        }
+    }
+}
