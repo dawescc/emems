@@ -46,6 +46,8 @@ body {
         display: flex;
         flex-direction: column;
         height: 100%;
+
+        position: relative;
     }
 }
 
@@ -90,9 +92,7 @@ body {
     border-radius: $border-rad;
     background-color: transparent;
 
-    margin-block: 5px;
-    position: sticky;
-    margin-top: 35px;
+    margin-block: 3vh 6vh;
 
     &:focus-within {
         background-color: rgba($color: #383838, $alpha: .055);  
@@ -137,7 +137,7 @@ body {
         padding-block: 5px;
 
         resize: none;
-        min-height: 1em;
+        min-height: 1ch;
 
         flex-grow: 2;
 
@@ -223,7 +223,7 @@ body {
 ///// After Input Container
 /// and Objects
 #after-input {
-    margin-top: 5vh;
+    margin-top: 2vh;
     padding: 7.5px;
     background-color: $red;
     border-radius: 15px;
