@@ -225,7 +225,7 @@ body {
     background-color: $red;
     border-radius: 15px;
     flex-grow: 2;
-    background: linear-gradient(to bottom, $sitebg -55%, $background 55%, $sitebg 95%);
+    background: linear-gradient(to bottom, $sitebg -500%, $background 55%, $sitebg 95%);
     height: 75vh;
     overflow: hidden;
     margin-inline: 0.25em;
@@ -281,21 +281,21 @@ body {
             padding-top: 5px;
     
     
-            a {
+            * {
                 text-decoration: none;
                 color: inherit;
                 margin: 0;
                 padding: 0;
     
-                p {
-                    margin-inline: 0;
-                    padding: 0;
-                    padding-inline: 12px;
-                    word-break: break-all;
-                }
+            }
+
+            p {
+                padding-inline: 10px 30px;
+                margin: 5px;
             }
     
-            #trash {
+            #trash,
+            #linky {
                 float: right;
                 margin: 5px;
                 padding-inline: 4px;
@@ -305,6 +305,12 @@ body {
                 }
                 &:active {
                     color: $red;
+                }
+            }
+            
+            #linky {
+                &:active {
+                    color: $green;
                 }
             }
         }

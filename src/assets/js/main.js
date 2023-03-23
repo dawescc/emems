@@ -173,8 +173,9 @@ function getRSS() {
           console.log(posttxtid)
           post.innerHTML = 
           `<a id="${id}" target="_blank" href="${link}">
-            <p id="${id}_text">${description}</p>
+          <i id="linky" class="fa-solid fa-external-link"></i>
           </a>
+          <p id="${id}_text">${description}</p>
           <i id="trash" onclick="deleteMemo(${id})" class="fa-solid fa-trash-can"></i>`;
           postsContainer.appendChild(post);
       });
