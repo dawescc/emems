@@ -92,7 +92,7 @@ body {
     border-radius: $border-rad;
     background-color: transparent;
 
-    margin-block: 3vh 6vh;
+    margin-block: 2vh 2vh;
 
     &:focus-within {
         background-color: rgba($color: #383838, $alpha: .055);  
@@ -223,7 +223,6 @@ body {
 ///// After Input Container
 /// and Objects
 #after-input {
-    margin-top: 2vh;
     padding: 7.5px;
     background-color: $red;
     border-radius: 15px;

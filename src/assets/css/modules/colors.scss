@@ -4,18 +4,19 @@ $red: tomato;
 $primary: pink;
 
 ////// Default Colors
-$background: #dadada;
-$sitebg: #bebebe;
-$text: #292929;
-$border: #585858;
-$accenttxt: rgb(95, 95, 95);
+
+$background: #282c34;
+$sitebg: #2c323d;
+$text: #F9F9F9;
+$border:   #5c6370;
+$accenttxt: #abb2bf;
 
 ////// Dark Mode Colors
 @media (prefers-color-scheme: dark) {
-  $background: #282828;
-  $sitebg: #101010;
-  $text: #F9F9F9;
-  $border: #383838;
+  $background: #dadada;
+  $sitebg: #bebebe;
+  $text: #292929;
+  $border: #585858;
   $accenttxt: rgb(95, 95, 95);
 }
 
