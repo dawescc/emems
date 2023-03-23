@@ -3,27 +3,9 @@ $green: mediumseagreen;
 $red: tomato;
 $primary: pink;
 
-////// Default Colors
-$background: #dadada;
-$sitebg: #bebebe;
-$text: #292929;
-$border: #585858;
-$accenttxt: rgb(95, 95, 95);
 
-////// Dark Mode Colors
-@media (prefers-color-scheme: dark) {
-  $background: #282828;
-  $sitebg: #101010;
-  $text: #F9F9F9;
-  $border: #383838;
-  $accenttxt: rgb(95, 95, 95);
-}
-
-////// Light Mode Colors
-@media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
-  $background: #dadada;
-  $sitebg: #bebebe;
-  $text: #292929;
-  $border: #585858;
-  $accenttxt: rgb(95, 95, 95);
-}
+$background: #3e4451;
+$sitebg: #2c323d;
+$text: #F9F9F9;
+$border: #5c6370;
+$accenttxt: #abb2bf;
