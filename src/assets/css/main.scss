@@ -14,16 +14,16 @@ textarea,
 :root,
 html {
     font-family: 'Lato', sans-serif;
-    background-color: $sitebg;
-    color: $text;
+    background-color: var(--sitebg);
+    color: var(--text);
     font-size: 16px;
     overflow: hidden;
 }
 
 body {
     margin: 0;
-    background: linear-gradient(to bottom, $sitebg -33%, $background 33%, $sitebg 100%);
-    // background: linear-gradient(to bottom, $background 33%, $sitebg 90%);
+    background: linear-gradient(to bottom, var(--sitebg) -33%, var(--background) 33%, var(--sitebg) 100%);
+    // background: linear-gradient(to bottom, var(--background) 33%, var(--sitebg) 90%);
     overflow: hidden;
 }
 
@@ -59,7 +59,7 @@ body {
     padding: 0;
     padding-block: 7px;
     position: fixed;
-    background: rgba($background, 100%);
+    background: rgba(var(--background), 100%);
     bottom: 0;
     display: flex;
     font-size: 12px;
@@ -88,7 +88,7 @@ body {
     align-items: center;
     justify-content: space-evenly;
 
-    border: 1.5px solid $border;
+    border: 1.5px solid var(--border);
     border-radius: $border-rad;
     background-color: transparent;
 
@@ -99,7 +99,7 @@ body {
     }
 
     #bolt {
-        color: $accenttxt;
+        color: var(--accenttxt);
         margin-inline: 15px 10px;
         margin-block: 5px;
 
@@ -129,7 +129,7 @@ body {
     .memo-input {
         font-weight: bold;
         background-color: transparent;
-        color: $text;
+        color: var(--text);
         border: none;
 
         margin:0;
@@ -155,14 +155,14 @@ body {
 
     .send-button {
         background-color: transparent;
-        color: $text;
+        color: var(--text);
         border: none;
         cursor: pointer;
         margin-inline: 10px 15px;
         margin-block: 5px;
 
         &:hover {
-            color: $accenttxt;
+            color: var(--accenttxt);
         }
 
         &:active {
@@ -212,7 +212,7 @@ body {
     text-align: center;
     
     background-color: rgba($color: $red, $alpha: .45);
-    color: $text;
+    color: var(--text);
     font-size: smaller;
 
     .modal-content {
@@ -227,20 +227,20 @@ body {
     background-color: $red;
     border-radius: 15px;
     flex-grow: 2;
-    background: linear-gradient(to bottom, $sitebg -55%, $background 55%, $sitebg 95%);
+    background: linear-gradient(to bottom, var(--sitebg) -55%, var(--background) 55%, var(--sitebg) 95%);
     height: 75vh;
     overflow: hidden;
     margin-inline: 0.25em;
     position: relative;
 
-    box-shadow: 0px 0px 10px rgba($color: $background, $alpha: .5);
+    box-shadow: 0px 0px 10px rgba($color: var(--background), $alpha: .5);
 
     h3#recents {
         margin: 0;
         margin-bottom: 10px;
         padding: 10px;
         font-size: 18px;
-        border-bottom: 1px solid $border;
+        border-bottom: 1px solid var(--border);
         
         i#refresh {
             float: right;
@@ -252,7 +252,7 @@ body {
             &:active {
                 scale: 0.75;
                 transform: rotatez(-90deg);
-                color: $accenttxt;
+                color: var(--accenttxt);
             }
     
             &.clicked {
@@ -274,10 +274,10 @@ body {
             border-radius: 12px;
             background-color: rgba($color: #383838, $alpha: .055);
             backdrop-filter: blur(1.5);
-            border: 1px solid rgba($color: $border, $alpha: .55);
+            border: 1px solid rgba($color: var(--border), $alpha: .55);
             &:hover {
                 background-color: rgba($color: #383838, $alpha: .11);  
-                border: 1px solid $border;
+                border: 1px solid var(--border);
             }
             margin-top: 10px;
             padding-top: 5px;
@@ -303,7 +303,7 @@ body {
                 padding-inline: 4px;
                 padding-block: 0px 4px;
                 &:hover {
-                    color: $accenttxt;
+                    color: var(--accenttxt);
                 }
                 &:active {
                     color: $red;
@@ -313,7 +313,7 @@ body {
     
         .nopost {
             text-align:center;
-            color: $accenttxt;
+            color: var(--accenttxt);
             margin-top: 50%;
     
             p {
