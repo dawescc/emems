@@ -12,13 +12,21 @@ textarea {
 }
 
 html {
-    background-color: $sitebg;
     color: $text;
     font-size: 16px;
+
+    background-color: $sitebg;
+    background-image: radial-gradient(
+    rgba(255, 255, 255, 0.1) 1px, 
+    transparent 1px
+    );
+    background-position: 50% 50%;
+    background-size: 1.1rem 1.1rem;
 }
 
 body {
     margin: 0;
+    background: linear-gradient(to bottom, $sitebg 0%, transparent 10%, $sitebg 98%);
 }
 
 ///// Page Containers
@@ -29,6 +37,7 @@ body {
     align-items: center;
     height: 100vh;
     flex-direction: column;
+    overflow: hidden;
 
     .content-wrapper {
         max-width: 750px;
@@ -38,7 +47,6 @@ body {
         display: flex;
         flex-direction: column;
         height: 100%;
-        overflow: hidden;
     }
 }
 
@@ -80,7 +88,8 @@ body {
     justify-content: space-evenly;
     border: 1.5px solid $border;
     border-radius: $border-rad;
-    background-color: transparent;
+    // background-color: rgba($color: $sitebg, $alpha: 0.05);
+    background: linear-gradient(to bottom, transparent -25%, $sitebg 110%);
     position: relative;
 
     padding-block: 5px 5px;
@@ -88,7 +97,8 @@ body {
     
 
     &:focus-within {
-        background-color: rgba($color: #383838, $alpha: .055);  
+        background: unset;
+        background-color: $background;  
     }
 
     #bolt {
@@ -218,18 +228,74 @@ body {
 #after-input {
     margin-top: 4vh;
     padding: 7.5px;
-    background-color: $red;
     border-radius: 15px;
     flex-grow: 2;
-    background: linear-gradient(to bottom, $sitebg -500%, $background 55%, $sitebg 95%);
     height: 75vh;
-    
 
+    background: linear-gradient(to bottom, $sitebg -500%, $background 55%, $sitebg 95%);
 
     margin-inline: 0.25em;
     position: relative;
 
     box-shadow: 0px 0px 10px rgba($color: $sitebg, $alpha: .5);
+
+
+    &:after {  
+        content: "";
+        height: 70px;
+        width: 1px;  
+        position: absolute;  
+        right: 0px;
+        top: 65%;
+        transition: top, opacity;
+        transition-duration: 600ms;
+        transition-timing-function: ease;
+        background: linear-gradient(
+          transparent,
+          $accenttxt,
+          transparent
+        );
+        opacity: 0;
+    }
+
+    &:after {  
+        top: 65%;
+        opacity: .85;
+    }
+      
+    &:hover:after {
+        top: 35%;
+        opacity: 0;
+    }
+
+    &:before {  
+        content: "";
+        height: 1px;
+        width: 70px;  
+        position: absolute;  
+        right: 65%;
+        top: 0%;
+        transition: right, opacity;
+        transition-duration: 600ms;
+        transition-timing-function: ease;
+        background: linear-gradient( to right,
+          transparent,
+          $accenttxt,
+          transparent
+        );
+        opacity: 0;
+    }
+      
+    &:before {  
+        right: 10%;
+        opacity: .85;
+    }
+
+    &:hover:before {
+        right: 45%;
+        opacity: 0;
+    }
+
 
     h3#recents {
         margin: 0;
@@ -263,18 +329,18 @@ body {
         display: flex;
         flex-direction: column;
         height: 92.5%;
-        
+
         overflow-y: auto;
 
         padding-inline: 10px;
-    
+
         .post {
             border-radius: 12px;
             background-color: rgba($color: #383838, $alpha: .055);
             backdrop-filter: blur(1.5);
             border: 1px solid rgba($color: $border, $alpha: .55);
             &:hover {
-                background-color: rgba($color: #383838, $alpha: .11);  
+                background-color: rgba($color: #f9f9f9, $alpha: .055);  
                 border: 1px solid $border;
             }
             margin-top: 10px;
