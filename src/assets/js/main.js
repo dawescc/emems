@@ -84,7 +84,7 @@ function sendMemo() {
       "content": memoContent
     };
     // Send HTTP Request
-    fetch('https://memos.dawes.casa/api/memo?openId=05d3578b-8672-447c-8fff-dec4db3df6dc', {
+    fetch('http://192.168.0.157:3006/memo?dawesID=S45xYV2HQn2S5vWnr', {
       method: 'POST',
       body: JSON.stringify(memoData),
       headers: {
@@ -117,7 +117,7 @@ function sendMemo() {
 // Delete Memo Function
 function deleteMemo(id) {
   // Construct the URL with the ID parameter
-  const url = `https://memos.dawes.casa/api/memo/${id}?openId=05d3578b-8672-447c-8fff-dec4db3df6dc`;
+  const url = `http://192.168.0.157:3006/memo/${id}?dawesID=S45xYV2HQn2S5vWnr`;
   
   // Send the DELETE request with fetch()
   fetch(url, {
@@ -152,62 +152,51 @@ memoInput.addEventListener('keyup', event => {
   }
 });
 
-// RSS Feed for Recent Posts
-function getRSS() {
-  fetch('https://memos.dawes.casa/explore/rss.xml')
-  .then(response => response.text())
-  .then(xmlString => {
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(xmlString, 'application/xml');
-      const items = xml.querySelectorAll('item');
+function getMemos() {
+  fetch('http://192.168.0.157:3006/memo?dawesID=S45xYV2HQn2S5vWnr')
+    .then(response => response.json())
+    .then(memos => {
       const postsContainer = document.getElementById('posts');
-      items.forEach(item => {
-          const title = item.querySelector('title').textContent;
-          const link = item.querySelector('link').textContent;
-          const id = link.substring(link.lastIndexOf('/') + 1);
-          const description = item.querySelector('description').textContent;
+      postsContainer.innerHTML = ""; // Clear existing posts
+
+      if (memos.length > 0) {
+        memos.forEach(memo => {
+          const id = memo.id;
+          const content = memo.content;
           const post = document.createElement('div');
           post.className = 'post';
           post.id = `${id}`;
           const posttxtid =`${id}_text`
-          console.log(posttxtid)
           post.innerHTML = 
-          `<a id="${id}" target="_blank" href="${link}">
-          <i id="linky" class="fa-solid fa-external-link"></i>
+          `<a id="${id}" target="_blank" href="${content}">
           </a>
-          <p id="${id}_text">${description}</p>
+          <p id="${id}_text">${content}</p>
           <i id="trash" onclick="deleteMemo(${id})" class="fa-solid fa-trash-can"></i>`;
           postsContainer.appendChild(post);
-      });
-
-      if (!postsContainer.hasChildNodes()) {
-        const pubby = xml.querySelectorAll('pubDate');
-        const pubbydate = pubby[0].innerHTML
+        });
+      } else {
+        // Handle case when there are no memos
         const nopost = document.createElement('div');
         nopost.className = 'nopost';
         nopost.innerHTML = 
         `<p><i class="fa-regular fa-thumbs-down"></i>
         ${getRandomEmptyText()}</p>
         <br />
-        <p id="lcheck">Checked: ${pubbydate}</p>`;
+        <p>No memos</p>`;
   
         postsContainer.appendChild(nopost);
       }
-  })
-  .catch(error => {
+    })
+    .catch(error => {
       console.log(error);
-  });
-} getRSS();
+    });
+} getMemos();
 
 // Refresh Posts
 function refreshRSS() {
-  const postsContainer = document.querySelector('#posts');
-  postsContainer.innerHTML = ``; // Clear existing posts
-
-  // Call the getRSS() function to fetch and render new posts
-  getRSS();
+  // Call the getMemos() function to fetch and render new memos
+  getMemos();
 }
-
 // Refresh Button Animation
 const refButton = document.getElementById("refresh");
 
