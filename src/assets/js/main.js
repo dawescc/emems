@@ -84,7 +84,7 @@ function sendMemo() {
       "content": memoContent
     };
     // Send HTTP Request
-    fetch('https://memos.dawes.casa/memo?dawesID=S45xYV2HQn2S5vWnr', {
+    fetch('https://memos.dawes.casa/memo?openID=S45xYV2HQn2S5vWnr', {
       method: 'POST',
       body: JSON.stringify(memoData),
       headers: {
@@ -117,7 +117,7 @@ function sendMemo() {
 // Delete Memo Function
 function deleteMemo(id) {
   // Construct the URL with the ID parameter
-  const url = `https://memos.dawes.casa/memo/${id}?dawesID=S45xYV2HQn2S5vWnr`;
+  const url = `https://memos.dawes.casa/memo/${id}?openID=S45xYV2HQn2S5vWnr`;
   
   // Send the DELETE request with fetch()
   fetch(url, {
@@ -153,7 +153,7 @@ memoInput.addEventListener('keyup', event => {
 });
 
 function getMemos() {
-  fetch('https://memos.dawes.casa/memo?dawesID=S45xYV2HQn2S5vWnr')
+  fetch('https://memos.dawes.casa/memo?openID=S45xYV2HQn2S5vWnr')
     .then(response => response.json())
     .then(memos => {
       const postsContainer = document.getElementById('posts');
