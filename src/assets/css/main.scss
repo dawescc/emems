@@ -79,6 +79,9 @@ body {
 
 ///// Input Container
 /// and Objects
+/// 
+
+
 .input-container {
     $border-rad: 7.5px;
 
@@ -90,11 +93,10 @@ body {
     border-radius: $border-rad;
     // background-color: rgba($color: $sitebg, $alpha: 0.05);
     background: linear-gradient(to bottom, transparent -25%, $sitebg 110%);
-    position: relative;
-
+    width: 100%;
+    max-width: 750px;
     padding-block: 5px 5px;
-    margin-block: 40px 45px;
-    
+
 
     &:focus-within {
         background: unset;
@@ -226,76 +228,15 @@ body {
 ///// After Input Container
 /// and Objects
 #after-input {
-    margin-top: 4vh;
     padding: 7.5px;
     border-radius: 15px;
-    flex-grow: 2;
-    height: 75vh;
-
     background: linear-gradient(to bottom, $sitebg -500%, $background 55%, $sitebg 95%);
-
-    margin-inline: 0.25em;
-    position: relative;
-
     box-shadow: 0px 0px 10px rgba($color: $sitebg, $alpha: .5);
 
-/* 
-    &:after {  
-        content: "";
-        height: 70px;
-        width: 1px;  
-        position: absolute;  
-        right: 0px;
-        top: 65%;
-        transition: top, opacity;
-        transition-duration: 600ms;
-        transition-timing-function: ease;
-        background: linear-gradient(
-          transparent,
-          $accenttxt,
-          transparent
-        );
-        opacity: 0;
-    }
+    margin-block: 25px;
 
-    &:after {  
-        top: 65%;
-        opacity: .85;
-    }
-      
-    &:hover:after {
-        top: 35%;
-        opacity: 0;
-    }
+    height: 82.5vh;
 
-    &:before {  
-        content: "";
-        height: 1px;
-        width: 70px;  
-        position: absolute;  
-        right: 65%;
-        top: 0%;
-        transition: right, opacity;
-        transition-duration: 600ms;
-        transition-timing-function: ease;
-        background: linear-gradient( to right,
-          transparent,
-          $accenttxt,
-          transparent
-        );
-        opacity: 0;
-    }
-      
-    &:before {  
-        right: 10%;
-        opacity: .85;
-    }
-
-    &:hover:before {
-        right: 45%;
-        opacity: 0;
-    }
-*/ 
 
     h3#recents {
         margin: 0;
