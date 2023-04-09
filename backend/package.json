@@ -1,0 +1,9 @@
+{
+  "name": "emems",
+  "author": "Ryan Dawes",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.2"
+  }
+}
