@@ -35,7 +35,7 @@ const createMemosTable = () => {
 createMemosTable();
 
 app.get('/memos', (req, res) => {
-    const query = "SELECT * FROM memos";
+    const query = "SELECT * FROM memos ORDER BY created_at DESC";
     db.all(query, [], (err, rows) => {
         if (err) {
             res.status(500).send(err.message);

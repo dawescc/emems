@@ -84,7 +84,7 @@ function sendMemo() {
       "content": memoContent
     };
     // Send HTTP Request
-    fetch('https://memos.dawes.casa/api/memo?openId=05d3578b-8672-447c-8fff-dec4db3df6dc', {
+    fetch('http://localhost:3000/memos', {
       method: 'POST',
       body: JSON.stringify(memoData),
       headers: {
@@ -117,7 +117,7 @@ function sendMemo() {
 // Delete Memo Function
 function deleteMemo(id) {
   // Construct the URL with the ID parameter
-  const url = `https://memos.dawes.casa/api/memo/${id}?openId=05d3578b-8672-447c-8fff-dec4db3df6dc`;
+  const url = `http://localhost:3000/memos/${id}`;
   
   // Send the DELETE request with fetch()
   fetch(url, {
@@ -154,18 +154,14 @@ memoInput.addEventListener('keyup', event => {
 
 // RSS Feed for Recent Posts
 function getRSS() {
-  fetch('https://memos.dawes.casa/explore/rss.xml')
-  .then(response => response.text())
-  .then(xmlString => {
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(xmlString, 'application/xml');
-      const items = xml.querySelectorAll('item');
+  fetch('http://localhost:3000/memos/')
+  .then(response => response.json())
+  .then(data => {
       const postsContainer = document.getElementById('posts');
-      items.forEach(item => {
-          const title = item.querySelector('title').textContent;
-          const link = item.querySelector('link').textContent;
-          const id = link.substring(link.lastIndexOf('/') + 1);
-          const description = item.querySelector('description').textContent;
+      data.forEach(memo => {
+          const link = memo.link;
+          const id = memo.memo_num;
+          const description = memo.content;
           const post = document.createElement('div');
           post.className = 'post';
           post.id = `${id}`;
@@ -181,15 +177,11 @@ function getRSS() {
       });
 
       if (!postsContainer.hasChildNodes()) {
-        const pubby = xml.querySelectorAll('pubDate');
-        const pubbydate = pubby[0].innerHTML
         const nopost = document.createElement('div');
         nopost.className = 'nopost';
         nopost.innerHTML = 
         `<p><i class="fa-regular fa-thumbs-down"></i>
-        ${getRandomEmptyText()}</p>
-        <br />
-        <p id="lcheck">Checked: ${pubbydate}</p>`;
+        ${getRandomEmptyText()}</p>`;
   
         postsContainer.appendChild(nopost);
       }
