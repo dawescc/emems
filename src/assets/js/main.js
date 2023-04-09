@@ -94,7 +94,7 @@ function sendMemo() {
       .then(response => {
         // Successful
         if (response.ok) {
-          //console.log('Memo added successfully');
+          // console.log('Memo added successfully');
           // clear the text box
           document.getElementById("memo-input").value = "";
           // remove indicators
@@ -166,7 +166,7 @@ function getRSS() {
           post.className = 'post';
           post.id = `${id}`;
           const posttxtid =`${id}_text`
-          //console.log(posttxtid)
+          // console.log(posttxtid)
           post.innerHTML = 
           `<a id="${id}" target="_blank" href="${link}">
           <i id="linky" class="fa-solid fa-external-link"></i>
