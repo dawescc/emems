@@ -84,7 +84,7 @@ function sendMemo() {
       "content": memoContent
     };
     // Send HTTP Request
-    fetch('http://localhost:3000/memos', {
+    fetch('/api/memos/', {
       method: 'POST',
       body: JSON.stringify(memoData),
       headers: {
@@ -117,7 +117,7 @@ function sendMemo() {
 // Delete Memo Function
 function deleteMemo(id) {
   // Construct the URL with the ID parameter
-  const url = `http://localhost:3000/memos/${id}`;
+  const url = `/api/memos/${id}`;
   
   // Send the DELETE request with fetch()
   fetch(url, {
@@ -154,7 +154,7 @@ memoInput.addEventListener('keyup', event => {
 
 // RSS Feed for Recent Posts
 function getRSS() {
-  fetch('http://localhost:3000/memos/')
+  fetch('/api/memos/')
   .then(response => response.json())
   .then(data => {
       const postsContainer = document.getElementById('posts');

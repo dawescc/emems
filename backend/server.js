@@ -1,8 +1,10 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
 
 const db = new sqlite3.Database('database.db', (err) => {
@@ -34,7 +36,7 @@ const createMemosTable = () => {
 
 createMemosTable();
 
-app.get('/memos', (req, res) => {
+app.get('/api/memos', (req, res) => {
     const query = "SELECT * FROM memos ORDER BY created_at DESC";
     db.all(query, [], (err, rows) => {
         if (err) {
@@ -45,7 +47,7 @@ app.get('/memos', (req, res) => {
     });
 });
 
-app.post('/memos', (req, res) => {
+app.post('/api/memos', (req, res) => {
     const content = req.body.content;
     const memoNumQuery = "SELECT MAX(memo_num) as maxMemoNum FROM memos";
     db.get(memoNumQuery, [], (err, row) => {
@@ -65,7 +67,7 @@ app.post('/memos', (req, res) => {
     });
 });
 
-app.delete('/memos/:memo_num', (req, res) => {
+app.delete('/api/memos/:memo_num', (req, res) => {
     const query = "DELETE FROM memos WHERE memo_num = ?";
     db.run(query, [req.params.memo_num], function (err) {
         if (err) {

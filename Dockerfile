@@ -1,14 +1,17 @@
 # Use nginx:stable-alpine as the base image
 FROM nginx:stable-alpine
 
-# Install node.js
-RUN apk add --no-cache nodejs
+# Copy frontend code to nginx html directory
+COPY ./dist /usr/share/nginx/html
+
+# Copy Nginx configuration
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
+# Install Node.js and other dependencies
+RUN apk add --no-cache nodejs npm
 
 # Set working directory to /app
 WORKDIR /app
-
-# Copy frontend code to nginx html directory
-COPY ./dist /usr/share/nginx/html/
 
 # Copy backend code to working directory
 COPY ./backend .
@@ -19,6 +22,6 @@ RUN npm install
 # Expose port 80
 EXPOSE 80
 
-# Start the backend server
-CMD ["node", "server.js"]
+# Start Nginx and Node.js server
+CMD ["sh", "-c", "nginx && node server.js"]
 
