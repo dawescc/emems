@@ -20,5 +20,5 @@ tests() {
 
 if tests; then
   echo "TESTS 3/3 PASSED"
+  exit 0
 fi
-exit 0
