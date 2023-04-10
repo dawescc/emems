@@ -45,7 +45,7 @@ jobs:
   test:
     needs: deploy
     container:
-      image: ${{ steps.deploy.outputs.container }}
+      image: ${{ deploy.outputs.container }}
     
     steps:
     - name: Run Tests
