@@ -18,7 +18,7 @@
     "dev": "parcel src/*.html",
     "clean": "rm -rf dist/ .parcel-cache/",
     "build": "parcel build src/*.html",
-    "permissions": "chmod +x scripts/*.sh",
+    "permissions": "chmod +x scripts/*.sh && chmod +x scripts/tests/*.sh",
     "make": "npm-run-all --sequential clean build permissions",
     "deploy": "npm run make && scripts/docker_build.sh && scripts/docker_deploy.sh",
     "test": "scripts/tests/test.sh"
