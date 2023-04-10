@@ -1,42 +1,64 @@
 name: testspace
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14.x'
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build Dist
-      run: npm run build
+      - name: Build Dist
+        run: npm run build
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14.x'
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build Dist and Deploy
-      run: npm run deploy
+      - name: Build Dist and Deploy
+        run: npm run deploy
 
-    - name: Run Tests
-      run: npm run test
+    container:
+      image: ubuntu-latest
+
+  test:
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    container:
+      image: ${{ steps.deploy.outputs.container }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      - name: Run Tests
+        run: npm run test
