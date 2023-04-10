@@ -2,7 +2,7 @@
 
 # Send POST request
 echo "Sending POST request..."
-if ! curl -sS -X POST -H "Content-Type: application/json" -d '{"text": "this is a scheduled test memo"}' localhost:3000/api/memos/ > /dev/null; then
+if ! curl -sS -X POST -H "Content-Type: application/json" -d '{"content": "this is a scheduled test memo"}' localhost:3000/api/memos/ > /dev/null; then
   echo "Failed to send POST request!"
   exit 1
 fi
