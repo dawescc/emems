@@ -1,4 +1,4 @@
-name: Node.js CI
+name: testspace
 
 on: [push, pull_request]
 
@@ -35,7 +35,7 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build Dist
+    - name: Build Dist and Deploy
       run: npm run deploy
 
     - name: Run Tests
