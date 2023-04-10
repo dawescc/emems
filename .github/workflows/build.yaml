@@ -22,7 +22,8 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    container:
+      image: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -38,5 +39,14 @@ jobs:
     - name: Build Dist and Deploy
       run: npm run deploy
 
+    - name: Run Tests
+      run: npm run test
+
+  test:
+    needs: deploy
+    container:
+      image: ${{ steps.deploy.outputs.container }}
+    
+    steps:
     - name: Run Tests
       run: npm run test
