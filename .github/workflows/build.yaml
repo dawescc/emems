@@ -1,6 +1,8 @@
 name: testspace
 
 on: [push, pull_request]
+    branches:
+      - [main, development]
 
 jobs:
   build:
