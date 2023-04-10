@@ -6,8 +6,8 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [14.x, 15.x, latest]
-        runs-on: [ubuntu-latest]
+        node-version: [17.x, 18.x, latest]
+        runs-on: [ubuntu-22.04, ubuntu-20.04, ubuntu-latest]
   
     runs-on: ${{ matrix.runs-on }}
 
@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         node-version: [17.x, 18.x, latest]
-        runs-on: [ubuntu-22.04, ubuntu-20.04, latest]
+        runs-on: [ubuntu-22.04, ubuntu-20.04, ubuntu-latest]
   
     runs-on: ${{ matrix.runs-on }}
 
@@ -52,8 +52,8 @@ jobs:
     needs: [build, deploy]
     strategy:
       matrix:
-        node-version: [14.x, 15.x, latest]
-        runs-on: [ubuntu-latest]
+        node-version: [17.x, 18.x, latest]
+        runs-on: [ubuntu-22.04, ubuntu-20.04, ubuntu-latest]
   
     runs-on: ${{ matrix.runs-on }}
 
