@@ -105,7 +105,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker Image
-        run: docker build -t ghcr.io/${{ github.actor }}/emems .
+        run: docker build -t ghcr.io/${{ github.actor }}/emems:latest -t ghcr.io/${{ github.actor }}/emems:alpha-stable .
 
       - name: Push Docker Image to Registry
         run: docker push ghcr.io/${{ github.actor }}/emems
