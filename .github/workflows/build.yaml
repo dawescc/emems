@@ -122,7 +122,9 @@ jobs:
         with:
           context: .
           push: true
+          flavor: |
+            latest=auto
+            prefix=v
           tags: |
-            # minimal
             type=semver,pattern={{version}}
           labels: ${{ steps.meta.outputs.labels }}
