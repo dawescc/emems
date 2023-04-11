@@ -10,79 +10,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        node-version: [latest]
-        runs-on: [ubuntu-latest]
-  
-    runs-on: ${{ matrix.runs-on }}
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Dist
-      run: npm run build
-
-  deploy:
-    needs: build
-    strategy:
-      matrix:
-        node-version: [latest]
-        runs-on: [ubuntu-latest]
-  
-    runs-on: ${{ matrix.runs-on }}
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Dist and Deploy
-      run: npm run deploy
-
-  test:
-    needs: [build, deploy]
-    strategy:
-      matrix:
-        node-version: [latest]
-        runs-on: [ubuntu-latest]
-  
-    runs-on: ${{ matrix.runs-on }}
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Dist and Deploy
-      run: npm run deploy
-      
-    - name: Run Tests
-      run: npm run test
-
   publish:
-    needs: [build, deploy, test]
     strategy:
       matrix:
         node-version: [latest]
@@ -111,16 +39,29 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v2
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Extract version and branch
+        id: version-and-branch
+        shell: bash
+        run: |
+          VERSION="unknown"
+          if [[ $GITHUB_REF == refs/tags/v* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          fi
+          BRANCH_NAME="none"
+          if [[ $GITHUB_REF == refs/heads/* ]]; then
+            BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "::set-output name=version::$VERSION"
+          echo "::set-output name=branch_name::$BRANCH_NAME"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version-and-branch.outputs.version }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
