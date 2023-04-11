@@ -6,7 +6,7 @@
 <img src="https://img.shields.io/github/v/tag/dawescc/emems?label=Latest+Version">
 <img src="https://img.shields.io/github/languages/count/dawescc/emems?">
 <img src="https://img.shields.io/github/languages/top/dawescc/emems">
-<img src="https://img.shields.io/github/commit-activity/w/dawescc/emems">
+<img src="https://img.shields.io/github/commit-activity/w/dawescc/emems"><br />
 <img src="https://img.shields.io/github/v/release/dawescc/emems?&label=Latest+Release&color=yellow">
 <img src="https://img.shields.io/github/actions/workflow/status/dawescc/emems/prod.yaml">
 <img src="https://img.shields.io/github/issues/dawescc/emems">
