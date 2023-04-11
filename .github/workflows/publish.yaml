@@ -11,6 +11,7 @@ env:
 
 jobs:
   publish:
+    if: ! contains(github.ref_name, 'beta')
     strategy:
       matrix:
         node-version: [latest]
