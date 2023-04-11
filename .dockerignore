@@ -10,4 +10,6 @@ package-lock.json
 
 .postcssrc
 
-tailwind.config.js
+tailwind.config.
+
+database.db
