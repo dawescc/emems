@@ -1,10 +1,10 @@
 name: release
 
 on:
-  registry_package:
-    types: [published]
-    tags:
-      - 'latest'
+  workflow_run:
+    workflows: ["publish"]
+    types:
+      - completed
 
 jobs:
   create_release:
