@@ -1,4 +1,4 @@
-name: publish
+name: production
 
 on:
   push:
@@ -9,6 +9,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  IMAGE_VERSION: ${{ github.ref_name }}
+  IMAGE_TAG: latest
 
 jobs:
   publish:
@@ -40,29 +42,27 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract version and branch
-        id: version-and-branch
-        shell: bash
-        run: |
-          VERSION="unknown"
-          if [[ $GITHUB_REF == refs/tags/v* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/v}
-          fi
-          BRANCH_NAME="none"
-          if [[ $GITHUB_REF == refs/heads/* ]]; then
-            BRANCH_NAME=${GITHUB_REF#refs/heads/}
-          fi
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
-          echo "::set-output name=version::$VERSION"
-          echo "::set-output name=branch_name::$BRANCH_NAME"
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version-and-branch.outputs.version }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Create Release
+        if: ${{ success() }}
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.IMAGE_VERSION }}
+          release_name: Version ${{ env.IMAGE_VERSION }}
+          body: |
+            New package created:
+            ${{ github.event.client_payload.package_name }}
+          draft: false
+          prerelease: false
