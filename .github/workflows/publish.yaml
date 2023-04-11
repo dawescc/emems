@@ -103,6 +103,9 @@ jobs:
       - name: Set image tag
         run: echo "IMAGE_TAG=beta-$(git rev-parse --short HEAD)" >> .env
 
+      - name: Load environment variables
+        run: source .env
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
