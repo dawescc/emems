@@ -25,6 +25,6 @@
     "dev_deploy": "scripts/docker_build.sh && scripts/docker_deploy.sh",
     "deploy": "npm run make && scripts/docker_build.sh && scripts/docker_deploy.sh",
     "test": "scripts/test.sh",
-    "pub_ag": "scripts/taggit.sh"
+    "pub_tag": "scripts/taggit.sh"
   }
 }
