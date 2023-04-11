@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    tags:
-      - 'v*.*.*'
 
 env:
   REGISTRY: ghcr.io
@@ -13,6 +11,7 @@ env:
 
 jobs:
   publish:
+    if: startsWith(github.ref, 'refs/tags/v')
     strategy:
       matrix:
         node-version: [latest]
@@ -65,6 +64,7 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version-and-branch.outputs.version }}
-            ${{ steps.version-and-branch.outputs.branch_name == 'main' && format('{0}/{1}:latest', env.REGISTRY, env.IMAGE_NAME) }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
+
 
