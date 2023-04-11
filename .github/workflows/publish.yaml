@@ -2,8 +2,8 @@ name: publish
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - main
 
 env:
   REGISTRY: ghcr.io
@@ -64,7 +64,7 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version-and-branch.outputs.version }}
-            ${{ steps.version-and-branch.outputs.branch_name == 'main' && format('{0}/{1}:latest', env.REGISTRY, env.IMAGE_NAME) || '' }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
 
 
