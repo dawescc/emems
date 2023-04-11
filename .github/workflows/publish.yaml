@@ -1,6 +1,6 @@
 name: emems
 
-on: [push, pull_request]
+on: push
 
 jobs:
   build:
@@ -73,3 +73,42 @@ jobs:
       
     - name: Run Tests
       run: npm run test
+
+  publish:
+    needs: [build, deploy, test]
+    strategy:
+      matrix:
+        node-version: [latest]
+        runs-on: [ubuntu-latest]
+  
+    runs-on: ${{ matrix.runs-on }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Dist
+        run: npm run build
+
+      - name: Set image tag
+        run: echo ::set-env name=IMAGE_TAG::alpha-${{ github.sha }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker Image
+        run: docker build -t ghcr.io/${{ github.actor }}/emems:${{ env.IMAGE_TAG }} .
+
+      - name: Push Docker Image to Registry
+        run: docker push ghcr.io/${{ github.actor }}/emems:${{ env.IMAGE_TAG }}
