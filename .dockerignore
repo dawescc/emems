@@ -13,3 +13,10 @@ package-lock.json
 tailwind.config.
 
 database.db
+
+compose.yaml
+
+.github/
+
+
+
