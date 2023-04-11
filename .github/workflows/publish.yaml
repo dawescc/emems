@@ -1,7 +1,8 @@
-name: emems
+name: publish
 
-on: push
-  branch: main
+on: push:
+  branches:
+    - main
 
 jobs:
   build:
