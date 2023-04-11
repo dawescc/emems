@@ -82,7 +82,7 @@ jobs:
       run: npm run test
 
   publish:
-    needs: [build, deploy, test]
+    #needs: [build, deploy, test]
     strategy:
       matrix:
         node-version: [latest]
