@@ -11,7 +11,7 @@ env:
 
 jobs:
   publish:
-    if: github.head_ref == 'main'
+    if: github.head_ref == 'origin/main'
     strategy:
       matrix:
         node-version: [latest]
