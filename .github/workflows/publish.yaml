@@ -83,7 +83,6 @@ jobs:
       matrix:
         node-version: [latest]
         runs-on: [ubuntu-latest]
-        image-tag: [$(git rev-parse --short HEAD)]
   
     runs-on: ${{ matrix.runs-on }}
 
@@ -108,8 +107,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker Image
-        run: docker build -t ghcr.io/${{ github.actor }}/emems:beta-${{ matrix.image-tag }} .
-
-      - name: Push Docker Image to Registry
-        run: docker push ghcr.io/${{ github.actor }}/emems:beta-${{ matrix.image-tag }}
+      - name: Build & Pub Docker Image
+        run: npm run ghcr_pub

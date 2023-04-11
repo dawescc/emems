@@ -21,6 +21,7 @@
     "permissions": "chmod +x scripts/*.sh && chmod +x scripts/tests/*.sh",
     "make": "npm-run-all --sequential clean build permissions",
     "deploy": "npm run make && scripts/docker_build.sh && scripts/docker_deploy.sh",
-    "test": "scripts/test.sh"
+    "test": "scripts/test.sh",
+    "ghcr_pub": "scripts/ghcr_publish.sh"
   }
 }
