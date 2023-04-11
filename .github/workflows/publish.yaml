@@ -101,7 +101,7 @@ jobs:
         run: npm run build
 
       - name: Set image tag
-        run: echo "IMAGE_TAG=beta-$(git rev-parse --short HEAD)" >> .env
+        run: export IMAGE_TAG=alpha-$(git rev-parse --short HEAD)
 
       - name: Load environment variables
         run: source .env
