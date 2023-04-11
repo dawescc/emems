@@ -65,5 +65,6 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version-and-branch.outputs.version }}
-            ${{ steps.version-and-branch.outputs.branch_name == 'main' && format('{0}/{1}:latest', env.REGISTRY, env.IMAGE_NAME) || '' }}
+            ${{ steps.version-and-branch.outputs.branch_name == 'main' && format('{0}/{1}:latest', env.REGISTRY, env.IMAGE_NAME) }}
           labels: ${{ steps.meta.outputs.labels }}
+
