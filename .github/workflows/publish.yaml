@@ -124,7 +124,7 @@ jobs:
           push: true
           flavor: |
             latest=auto
-            prefix=v
+            prefix="v"
           tags: |
             type=semver,pattern={{version}}
           labels: ${{ steps.meta.outputs.labels }}
