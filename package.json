@@ -21,6 +21,8 @@
     "build": "parcel build src/*.html",
     "permissions": "chmod +x scripts/*.sh && chmod +x scripts/tests/*.sh",
     "make": "npm-run-all --sequential clean build permissions",
+    "dev_rm": "docker stop testspace && docker rm testspace",
+    "dev_deploy": "scripts/docker_build.sh && scripts/docker_deploy.sh",
     "deploy": "npm run make && scripts/docker_build.sh && scripts/docker_deploy.sh",
     "test": "scripts/test.sh",
     "pub_ag": "scripts/taggit.sh"
