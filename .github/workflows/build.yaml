@@ -1,7 +1,6 @@
 name: emems
 
 on: push
-  branch: development
 
 jobs:
   build:
