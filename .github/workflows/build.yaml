@@ -109,7 +109,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker Image
-        run: docker build -t ghcr.io/${{ github.actor }}/${{ github.repository }}:alpha-${{ matrix.image-tag }} .
+        run: docker build -t ghcr.io/${{ github.actor }}/emems:alpha-${{ matrix.image-tag }} .
 
       - name: Push Docker Image to Registry
-        run: docker push ghcr.io/${{ github.actor }}/${{ github.repository }}:alpha-${{ matrix.image-tag }}
+        run: docker push ghcr.io/${{ github.actor }}/emems:alpha-${{ matrix.image-tag }}

@@ -83,6 +83,7 @@ jobs:
       matrix:
         node-version: [latest]
         runs-on: [ubuntu-latest]
+        image-tag: [$(git rev-parse --short HEAD)]
   
     runs-on: ${{ matrix.runs-on }}
 
@@ -100,9 +101,6 @@ jobs:
       - name: Build Dist
         run: npm run build
 
-      - name: Set image tag
-        run: export IMAGE_TAG=alpha-$(git rev-parse --short HEAD)
-
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -111,7 +109,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker Image
-        run: docker build -t ghcr.io/${{ github.actor }}/${{ github.repository }}:${IMAGE_TAG} .
+        run: docker build -t ghcr.io/${{ github.actor }}/emems:beta-${{ matrix.image-tag }} .
 
       - name: Push Docker Image to Registry
-        run: docker push ghcr.io/${{ github.actor }}/${{ github.repository }}:${IMAGE_TAG}
+        run: docker push ghcr.io/${{ github.actor }}/emems:beta-${{ matrix.image-tag }}
