@@ -41,16 +41,29 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v2
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Extract version and branch
+        id: version-and-branch
+        shell: bash
+        run: |
+          VERSION="unknown"
+          if [[ $GITHUB_REF == refs/tags/v* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          fi
+          BRANCH_NAME="none"
+          if [[ $GITHUB_REF == refs/heads/* ]]; then
+            BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "::set-output name=version::$VERSION"
+          echo "::set-output name=branch_name::$BRANCH_NAME"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version-and-branch.outputs.version }}
+            ${{ github.ref == 'refs/heads/main' && env.REGISTRY + '/' + env.IMAGE_NAME + ':latest' || '' }}
           labels: ${{ steps.meta.outputs.labels }}
