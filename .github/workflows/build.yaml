@@ -2,8 +2,8 @@ name: build
 
 on:
   push:
-    branches:
-      - development
+    tags:
+      - 'v*.*.*b'
 
 env:
   REGISTRY: ghcr.io
@@ -63,5 +63,5 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version-and-branch.outputs.version }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:nightly
+            ${{ steps.version-and-branch.outputs.branch_name == 'development' && format('{0}/{1}:nightly', env.REGISTRY, env.IMAGE_NAME) || '' }}
           labels: ${{ steps.meta.outputs.labels }}

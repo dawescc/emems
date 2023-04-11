@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Get the latest tag from the main branch
-latest_tag=$(git describe --tags --abbrev=0 origin/main)
+# Get the current branch
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Get the latest tag from the current branch
+latest_tag=$(git describe --tags --abbrev=0 origin/$current_branch)
 
 # Split the latest tag into its components
 IFS='.' read -ra tag_parts <<< "${latest_tag//v/}"
@@ -17,7 +20,14 @@ new_major=$((tag_parts[0] + interval_parts[0]))
 new_minor=$((tag_parts[1] + interval_parts[1]))
 new_patch=$((tag_parts[2] + interval_parts[2]))
 
-new_tag="v$new_major.$new_minor.$new_patch"
+# Check if the tag is a beta version
+read -p "Is this a BETA release? (y/n): " is_beta
+
+if [[ $is_beta == "y" ]]; then
+  new_tag="v$new_major.$new_minor.$new_patch-beta"
+else
+  new_tag="v$new_major.$new_minor.$new_patch"
+fi
 
 # Prompt for the message
 read -p "Enter the message (default: \"$new_tag created\"): " message
@@ -39,4 +49,3 @@ if [[ $confirm == "y" ]]; then
 else
   echo "Operation canceled."
 fi
-
