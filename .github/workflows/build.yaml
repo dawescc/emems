@@ -1,6 +1,7 @@
 name: emems
 
-on: [push, pull_request]
+on: push
+  branch: development
 
 jobs:
   build:
