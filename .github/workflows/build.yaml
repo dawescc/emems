@@ -11,7 +11,7 @@ env:
 
 jobs:
   publish:
-    if: [[ ${{ github.ref }} == *"beta" ]]
+    if: [[ ${{ github.ref_name }} == *"beta" ]]
     strategy:
       matrix:
         node-version: [latest]
