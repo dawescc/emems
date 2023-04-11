@@ -10,76 +10,6 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        node-version: [latest]
-        runs-on: [ubuntu-latest]
-  
-    runs-on: ${{ matrix.runs-on }}
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Dist
-      run: npm run build
-
-  deploy:
-    needs: build
-    strategy:
-      matrix:
-        node-version: [latest]
-        runs-on: [ubuntu-latest]
-  
-    runs-on: ${{ matrix.runs-on }}
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Dist and Deploy
-      run: npm run deploy
-
-  test:
-    needs: [build, deploy]
-    strategy:
-      matrix:
-        node-version: [latest]
-        runs-on: [ubuntu-latest]
-  
-    runs-on: ${{ matrix.runs-on }}
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Dist and Deploy
-      run: npm run deploy
-      
-    - name: Run Tests
-      run: npm run test
 
   publish:
     needs: [build, deploy, test]
@@ -122,5 +52,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: [main,latest]
           labels: ${{ steps.meta.outputs.labels }}
