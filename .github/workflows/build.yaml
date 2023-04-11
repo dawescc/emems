@@ -126,5 +126,5 @@ jobs:
             latest=auto
             prefix="v"
           tags: |
-            type=semver,pattern={{version}}
+            type=raw,value="v0.1.0"
           labels: ${{ steps.meta.outputs.labels }}
