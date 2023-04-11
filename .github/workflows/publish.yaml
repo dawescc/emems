@@ -10,9 +10,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-
   publish:
-    needs: [build, deploy, test]
     strategy:
       matrix:
         node-version: [latest]
@@ -52,5 +50,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: latest
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
