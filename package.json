@@ -22,6 +22,6 @@
     "make": "npm-run-all --sequential clean build permissions",
     "deploy": "npm run make && scripts/docker_build.sh && scripts/docker_deploy.sh",
     "test": "scripts/test.sh",
-    "ghcr_pub": "scripts/ghcr_publish.sh"
+    "pub_ag": "scripts/taggit.sh"
   }
 }
