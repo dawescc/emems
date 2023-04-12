@@ -21,6 +21,8 @@ emems is a simple web application that allows users to create and manage text me
 
 Each memo is a **rendered element**, so the possibilities are endless; create a fullstack web app in a memo, write a poem, or make a shopping list. The only limit is your imagination, the size of your screen, and probably some other techinical limitations that I'm not aware of.
 
+<img style="margin-bottom:2ch;" src="public/img/bounce.gif">
+
 emems is deployed using Docker, which makes it cross-platform. It has a REST API for programmatic access, and a web UI for manual access.
 
 ### Features
