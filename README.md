@@ -85,7 +85,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"content":"hi emems!"}' ht
 <img style="margin-block:2ch" src="public/img/curl.png">
 
 ```
-curl -X GET -H "Content-Type: application/json" http://localhost:3000/api/memos/1
+curl -X GET -H "Content-Type: application/json" http://localhost:3000/api/memos/
 ```
 
 <img style="margin-block:2ch" src="public/img/curl2.png">
