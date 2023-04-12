@@ -17,4 +17,48 @@
 
 ## What is emems?
 
-[ README Text ... TO DO ]
+emems is a simple web application that allows users to create and manage text memos. Users can create new memos, view all existing memos, and delete memos they no longer need.
+
+Each memo is a **rendered element**, so the possibilities are endless; create a fullstack web app in a memo, write a poem, or make a shopping list. The only limit is your imagination, the size of your screen, and probably some other techinical limitations that I'm not aware of.
+
+emems is deployed using Docker, which makes it cross-platform. It has a REST API for programmatic access, and a web UI for manual access.
+
+### Features
+
+- REST API
+- Web UI
+- Docker Deployment
+
+### Requirements
+
+- Docker &mdash; [Install Help](https://docs.docker.com/engine/install/)
+- Docker Compose (optional) &mdash; [Install Help](https://docs.docker.com/compose/#docker-compose)
+
+### Getting Started
+
+To install emem, you can either build it locally or use the pre-built Docker image.
+
+#### Docker Compose (Recommended)
+
+The recommended method of installing is to use docker compose. You can use the provided `compose.yaml` file. or add a service on your existing file. This will create a container on port 3000 with the name emem. Feel free to modify the local port as needed.
+
+#### Docker CLI
+
+If you're not using compose, you can use the docker cli to run the image. This will create a container on port 3000 with the name emems. Feel free to modify the local port as needed.
+
+`docker run -d --name emems -p 3000:80 ghcr.io/dawescc/emem:latest`
+
+#### Building Locally
+
+If you want to build the image locally, you can use the provided `Dockerfile`.
+
+`docker build -t emems .`
+
+and then deploy using the docker cli
+
+`docker run -d --name emems -p 3000:80 emems`
+
+### Usage
+
+[ API / USAGE TEXT ... TBD ]
+
