@@ -2,6 +2,8 @@
 
 <img style="margin-bottom:2ch;" src="public/img/bannerimg.png">
 
+------
+
 <p align="center">
 <img src="https://img.shields.io/github/v/tag/dawescc/emems?label=Latest+Version">
 <img src="https://img.shields.io/github/languages/count/dawescc/emems?">
@@ -48,19 +50,48 @@ The recommended method of installing is to use docker compose. You can use the p
 
 If you're not using compose, you can use the docker cli to run the image. This will create a container on port 3000 with the name emems. Feel free to modify the local port as needed.
 
-`docker run -d --name emems -p 3000:80 ghcr.io/dawescc/emem:latest`
+```docker run -d --name emems -p 3000:80 ghcr.io/dawescc/emem:latest```
 
 #### Building Locally
 
 If you want to build the image locally, you can use the provided `Dockerfile`.
 
-`docker build -t emems .`
+```docker build -t emems .```
 
 and then deploy using the docker cli
 
-`docker run -d --name emems -p 3000:80 emems`
+```docker run -d --name emems -p 3000:80 emems```
 
 ### Usage
 
-[ API / USAGE TEXT ... TBD ]
+emems has a simple REST API that can be used to create, read, and delete memos. The API is accessible at `http://localhost:port/api/memos` (or whatever port you're using):
 
+<br>
+
+`POST /api/memos` &mdash; Create a new memo
+
+`GET /api/memos` &mdash; Get all memos
+
+`GET /api/memos/:id` &mdash; Get a specific memo by id &nbsp; ![SOON](https://img.shields.io/badge/-SOON-9cf)
+
+`DELETE /api/memos/:id` &mdash; Delete a memo
+
+
+#### Screenshots
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"content":"hi emems!"}' http://localhost:3000/api/memos/
+```
+<img style="margin-block:2ch" src="public/img/curl.png">
+
+```
+curl -X GET -H "Content-Type: application/json" http://localhost:3000/api/memos/1
+```
+
+<img style="margin-block:2ch" src="public/img/curl2.png">
+
+```
+curl -X DELETE -H "Content-Type: application/json" http://localhost:3000/api/memos/1
+```
+
+<img style="margin-block:2ch" src="public/img/curl3.png">
