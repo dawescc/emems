@@ -19,7 +19,7 @@
 
 ## What is emems?
 
-emems is a simple web application that allows users to create and manage text memos. Users can create new memos, view all existing memos, and delete memos they no longer need.
+emems is a short & sweet web app that allows users to create and manage memo objects. Users can create new memos, view all existing memos, and delete memos they no longer need.
 
 Each memo is a **rendered element**, so the possibilities are endless; create a fullstack web app in a memo, write a poem, or make a shopping list. The only limit is your imagination, the size of your screen, and probably some other techinical limitations that I'm not aware of.
 
