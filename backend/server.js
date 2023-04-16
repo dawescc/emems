@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('dist'));
 
-const db = new sqlite3.Database('database.db', (err) => {
+const db = new sqlite3.Database('backend/database.db', (err) => {
     if (err) {
         console.error(err.message);
     } else {
