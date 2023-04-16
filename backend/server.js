@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('dist'));
 
 const db = new sqlite3.Database('database.db', (err) => {
     if (err) {
