@@ -15,15 +15,14 @@
     "cors": "latest"
   },
   "scripts": {
-    "dev": "parcel src/*.html",
-    "prod": "npm run clean && npm run build && node backend/server.js",
+    "dev_front": "parcel src/*.html",
     "clean": "rm -rf dist/ .parcel-cache/",
     "build": "parcel build src/*.html",
     "permissions": "chmod +x scripts/*.sh && chmod +x scripts/tests/*.sh",
     "make": "npm-run-all --sequential clean build permissions",
-    "dev_rm": "docker stop testspace && docker rm testspace",
-    "dev_deploy": "scripts/docker_build.sh && scripts/docker_deploy.sh",
-    "deploy": "npm run make && scripts/docker_build.sh && scripts/docker_deploy.sh",
+    "dev": "npm run make && node backend/server.js",
+    "dock_rm": "docker stop testspace && docker rm testspace",
+    "dock_deploy": "scripts/docker_build.sh && scripts/docker_deploy.sh",
     "test": "scripts/test.sh",
     "pub_tag": "scripts/taggit.sh"
   }
