@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # Build the Docker image using the Dockerfile
-docker build -t testspace .
+docker build -t testems .
 

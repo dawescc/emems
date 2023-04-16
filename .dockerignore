@@ -12,6 +12,7 @@ package-lock.json
 
 tailwind.config.
 
+backend/database.db
 database.db
 
 compose.yaml
