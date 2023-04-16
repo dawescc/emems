@@ -2,7 +2,7 @@ services:
   emems:
     container_name: emems
     ports:
-      - "3000:80"
+      - "9000:3000"
     restart: always
     image: ghcr.io/dawescc/emems:latest
 
