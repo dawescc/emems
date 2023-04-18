@@ -2,6 +2,8 @@ node_modules/
 
 .parcel-cache/
 
+.next/
+
 dist/
 
 package-lock.json

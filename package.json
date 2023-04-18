@@ -3,16 +3,22 @@
   "author": "Ryan Dawes",
   "private": true,
   "dependencies": {
+    "canvas-confetti": "^1.6.0",
+    "next": "^13.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sass": "latest"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.2",
+    "@types/react": "18.0.37",
+    "cors": "latest",
     "express": "^4.17.1",
     "npm-run-all": "^4.1.5",
     "parcel": "^2.6.2",
     "sqlite3": "^5.0.2",
     "tailwindcss": "^3.3.1",
-    "cors": "latest"
+    "typescript": "5.0.4"
   },
   "scripts": {
     "dev_front": "parcel src/*.html",
@@ -24,6 +30,10 @@
     "dock_rm": "docker stop testspace && docker rm testspace",
     "dock_deploy": "scripts/docker_build.sh && scripts/docker_deploy.sh",
     "test": "scripts/test.sh",
+    "n:dev": "next dev",
+    "n:build": "next build",
+    "n:start": "next start",
+    "n:lint": "next lint",
     "pub_tag": "scripts/taggit.sh"
   }
 }
