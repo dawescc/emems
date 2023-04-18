@@ -188,6 +188,14 @@ function getRSS() {
   })
   .catch(error => {
       console.log(error);
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'nopost';
+      errorDiv.innerHTML = 
+      `<p><i class="fa-solid fa-database"></i>
+        No database connected</p>`;
+  
+      const postsContainer = document.getElementById('posts');
+      postsContainer.appendChild(errorDiv);
   });
 } getRSS();
 
