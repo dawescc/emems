@@ -3,6 +3,7 @@ node_modules/
 .parcel-cache/
 
 dist/
+.next/
 
 package-lock.json
 
