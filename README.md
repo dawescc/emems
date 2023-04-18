@@ -2,8 +2,6 @@
 
 <img style="border-radius:1ch;margin-bottom:2ch;" src="public/img/bannerimg1.png">
 
-------
-
 <p align="center">
 <img src="https://img.shields.io/github/v/tag/dawescc/emems?label=Latest+Version">
 <img src="https://img.shields.io/github/languages/count/dawescc/emems?">
