@@ -1,6 +1,6 @@
 # emems
 
-<img style="margin-bottom:2ch;" src="public/img/bannerimg.png">
+<img style="border-radius:1ch;margin-bottom:2ch;" src="public/img/bannerimg.png">
 
 ------
 
@@ -23,7 +23,7 @@ emems is a short & sweet web app that allows users to create and manage memo obj
 
 Each memo is a **rendered element**, so the possibilities are endless; create a fullstack web app in a memo, write a poem, or make a shopping list. The only limit is your imagination, the size of your screen, and probably some other techinical limitations that I'm not aware of.
 
-<img style="margin-bottom:2ch;" src="public/img/bounce.gif">
+<img style="border-radius:1ch;margin-bottom:2ch;" src="public/img/bounce.gif">
 
 emems is deployed using Docker, which makes it cross-platform. It has a REST API for programmatic access, and a web UI for manual access.
 
@@ -44,13 +44,26 @@ To install emem, you can either build it locally or use the pre-built Docker ima
 
 #### Docker Compose (Recommended)
 
-The recommended method of installing is to use docker compose. You can use the provided `compose.yaml` file. or add a service on your existing file. This will create a container on port 3000 with the name emem. Feel free to modify the local port as needed.
+The recommended method of installing is to use docker compose. You can use the provided `compose.yaml` file, or add a service on your existing file.
+
+This will create a container on port 9000 with the name emem. Feel free to modify the local port as needed.
+
+```
+services:
+  emems:
+    container_name: emems
+    ports:
+      - "9000:3000"
+    restart: always
+    image: ghcr.io/dawescc/emems:latest
+
+```
 
 #### Docker CLI
 
-If you're not using compose, you can use the docker cli to run the image. This will create a container on port 3000 with the name emems. Feel free to modify the local port as needed.
+If you're not using compose, you can use the docker cli to run the image. This will create a container on port 9000 with the name emems. Feel free to modify the local port as needed.
 
-```docker run -d --name emems -p 3000:80 ghcr.io/dawescc/emem:latest```
+```docker run -d --name emems -p 9000:3000 ghcr.io/dawescc/emem:latest```
 
 #### Building Locally
 
@@ -60,11 +73,13 @@ If you want to build the image locally, you can use the provided `Dockerfile`.
 
 and then deploy using the docker cli
 
-```docker run -d --name emems -p 3000:80 emems```
+```docker run -d --name emems -p 9000:3000 emems```
 
 ### Usage
 
-emems has a simple REST API that can be used to create, read, and delete memos. The API is accessible at `http://localhost:port/api/memos` (or whatever port you're using):
+Access the web app via `https://localhost:9000`.
+
+emems has a simple REST API that can be used to create, read, and delete memos. The API is accessible at `/api/memos`:
 
 <br>
 
@@ -72,7 +87,7 @@ emems has a simple REST API that can be used to create, read, and delete memos. 
 
 `GET /api/memos` &mdash; Get all memos
 
-`GET /api/memos/:id` &mdash; Get a specific memo by id &nbsp; ![SOON](https://img.shields.io/badge/-SOON-9cf)
+`GET /api/memos/:id` &mdash; Get a specific memo by id &nbsp; ![COMING SOON](https://img.shields.io/badge/-COMING%20SOON-9cf)
 
 `DELETE /api/memos/:id` &mdash; Delete a memo
 
@@ -80,18 +95,18 @@ emems has a simple REST API that can be used to create, read, and delete memos. 
 #### Screenshots
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"content":"hi emems!"}' http://localhost:3000/api/memos/
+curl -X POST -H "Content-Type: application/json" -d '{"content":"hi emems!"}' http://localhost:9000/api/memos/
 ```
-<img style="margin-block:2ch" src="public/img/curl.png">
+<img style="border-radius:1ch;margin-block:2ch" src="public/img/curl.png">
 
 ```
-curl -X GET -H "Content-Type: application/json" http://localhost:3000/api/memos/
+curl -X GET -H "Content-Type: application/json" http://localhost:9000/api/memos/
 ```
 
-<img style="margin-block:2ch" src="public/img/curl2.png">
+<img style="border-radius:1ch;margin-block:2ch" src="public/img/curl2.png">
 
 ```
-curl -X DELETE -H "Content-Type: application/json" http://localhost:3000/api/memos/1
+curl -X DELETE -H "Content-Type: application/json" http://localhost:9000/api/memos/1
 ```
 
-<img style="margin-block:2ch" src="public/img/curl3.png">
+<img style="border-radius:1ch;margin-block:2ch" src="public/img/curl3.png">
