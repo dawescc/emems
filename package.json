@@ -1,10 +1,8 @@
 {
   "name": "emems",
   "author": "Ryan Dawes",
-  "private": true,
-  "dependencies": {
-    "sass": "latest"
-  },
+  "private": false,
+
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.2",
     "express": "^4.17.1",
@@ -12,18 +10,17 @@
     "parcel": "^2.6.2",
     "sqlite3": "^5.0.2",
     "tailwindcss": "^3.3.1",
+    "sass": "latest",
     "cors": "latest"
   },
   "scripts": {
-    "dev_front": "parcel src/*.html",
-    "clean": "rm -rf dist/ .parcel-cache/",
-    "build": "parcel build src/*.html",
-    "permissions": "chmod +x scripts/*.sh && chmod +x scripts/tests/*.sh",
-    "make": "npm-run-all --sequential clean build permissions",
-    "dev": "npm run make && node backend/server.js",
-    "dock_rm": "docker stop testspace && docker rm testspace",
-    "dock_deploy": "scripts/docker_build.sh && scripts/docker_deploy.sh",
-    "test": "scripts/test.sh",
-    "pub_tag": "scripts/taggit.sh"
+    "p:dev": "parcel src/*.html",
+    "p:clean": "rm -rf dist/ .parcel-cache/",
+    "p:build": "parcel build src/*.html",
+    "n:run": "node backend/server.js",
+    "prod:run": "npm-run-all --sequential p:clean p:build n:run",
+    "test:perm": "chmod +x scripts/*.sh && chmod +x scripts/tests/*.sh",
+    "test:run": "scripts/test.sh",
+    "tag:new": "scripts/taggit.sh"
   }
 }
