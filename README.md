@@ -1,6 +1,6 @@
 # emems
 
-<img style="border-radius:1ch;margin-bottom:2ch;" src="public/img/bannerimg.png">
+<img style="border-radius:1ch;margin-bottom:2ch;" src="public/img/bannerimg1.png">
 
 ------
 
@@ -19,13 +19,9 @@
 
 ## What is emems?
 
-emems is a short & sweet web app that allows users to create and manage memo objects. Users can create new memos, view all existing memos, and delete memos they no longer need.
+**emems** is a short & sweet web app that allows users to create and manage memo objects. Create, view, and delete memos from the web GUI or the API.
 
-Each memo is a **rendered element**, so the possibilities are endless; create a fullstack web app in a memo, write a poem, or make a shopping list. The only limit is your imagination, the size of your screen, and probably some other techinical limitations that I'm not aware of.
-
-<img style="border-radius:1ch;margin-bottom:2ch;" src="public/img/bounce.gif">
-
-emems is deployed using Docker, which makes it cross-platform. It has a REST API for programmatic access, and a web UI for manual access.
+Each memo is a *rendered element*, so the possibilities are endless; the only limit is your imagination and probably some techinical limitations that I'm not aware of yet.
 
 ### Features
 
@@ -35,18 +31,21 @@ emems is deployed using Docker, which makes it cross-platform. It has a REST API
 
 ### Requirements
 
+**emems** is deployed using Docker.
+
 - Docker &mdash; [Install Help](https://docs.docker.com/engine/install/)
 - Docker Compose (optional) &mdash; [Install Help](https://docs.docker.com/compose/#docker-compose)
 
 ### Getting Started
 
-To install emem, you can either build it locally or use the pre-built Docker image.
+To install emems, you can either build it locally or use the pre-built Docker image.
 
-#### Docker Compose (Recommended)
+#### Pre-Built Docker Image
+##### Docker Compose (Recommended)
 
 The recommended method of installing is to use docker compose. You can use the provided `compose.yaml` file, or add a service on your existing file.
 
-This will create a container on port 9000 with the name emem. Feel free to modify the local port as needed.
+This will create a container on port 9000 with the name emems. Feel free to modify the local port as needed.
 
 ```
 services:
@@ -59,11 +58,11 @@ services:
 
 ```
 
-#### Docker CLI
+##### Docker CLI
 
 If you're not using compose, you can use the docker cli to run the image. This will create a container on port 9000 with the name emems. Feel free to modify the local port as needed.
 
-```docker run -d --name emems -p 9000:3000 ghcr.io/dawescc/emem:latest```
+```docker run -d --name emems -p 9000:3000 ghcr.io/dawescc/emems:latest```
 
 #### Building Locally
 
