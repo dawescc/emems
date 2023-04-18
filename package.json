@@ -2,38 +2,29 @@
   "name": "emems",
   "author": "Ryan Dawes",
   "private": true,
-  "dependencies": {
+  "devDependencies": {
+    "@types/cors": "^2.8.5",
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.37",
     "canvas-confetti": "^1.6.0",
+    "cors": "^2.8.5",
     "next": "^13.3.0",
+    "npm-run-all": "^4.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "latest"
-  },
-  "devDependencies": {
-    "@parcel/transformer-sass": "^2.6.2",
-    "@types/react": "18.0.37",
-    "cors": "latest",
-    "express": "^4.17.1",
-    "npm-run-all": "^4.1.5",
-    "parcel": "^2.6.2",
-    "sqlite3": "^5.0.2",
+    "sass": "^1.62.0",
+    "sqlite": "^4.1.2",
+    "sqlite3": "^5.1.6",
     "tailwindcss": "^3.3.1",
-    "typescript": "5.0.4"
+    "typescript": "^5.0.4"
   },
   "scripts": {
-    "dev_front": "parcel src/*.html",
-    "clean": "rm -rf dist/ .parcel-cache/",
-    "build": "parcel build src/*.html",
-    "permissions": "chmod +x scripts/*.sh && chmod +x scripts/tests/*.sh",
-    "make": "npm-run-all --sequential clean build permissions",
-    "dev": "npm run make && node backend/server.js",
-    "dock_rm": "docker stop testspace && docker rm testspace",
-    "dock_deploy": "scripts/docker_build.sh && scripts/docker_deploy.sh",
-    "test": "scripts/test.sh",
-    "n:dev": "next dev",
-    "n:build": "next build",
-    "n:start": "next start",
-    "n:lint": "next lint",
-    "pub_tag": "scripts/taggit.sh"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test:perm": "chmod +x scripts/*.sh && chmod +x scripts/tests/*.sh",
+    "test:run": "scripts/test.sh",
+    "tag:create": "scripts/taggit.sh"
   }
 }

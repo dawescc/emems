@@ -9,6 +9,7 @@ function HomePage() {
   }, []);
 
   function autoFocus() {
+    const memoInput = document.querySelector("#bolt");
     useEffect(() => {
       memoInput.focus();
     }, []);
@@ -101,6 +102,7 @@ function HomePage() {
         .catch(error => console.error(error));
     }
   }
+  
   function deleteMemo(id) {
     const url = `/api/memos/${id}`;
 
@@ -209,7 +211,7 @@ function HomePage() {
         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
       </>
     )
-  }
-  
-  export default HomePage
+}
+
+export default HomePage
   
