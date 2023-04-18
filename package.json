@@ -21,7 +21,7 @@
     "prod:run": "npm-run-all --sequential p:clean p:build n:run",
     "test:perm": "chmod +x scripts/*.sh && chmod +x scripts/tests/*.sh",
     "test:run": "scripts/test.sh",
-    "v:run_bg": "node backend/server.js &",
+    "v:run_bg": "node backend/server.js >/dev/null 2>&1 &",
     "v:deploy": "npm-run-all --sequential v:run_bg p:build",
     "tag:new": "scripts/taggit.sh"
   }
